@@ -1,0 +1,14 @@
+form.login {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: auto;
+    input {
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+    button {
+        width: fit-content;
+        margin-left: auto;
+    }
+}

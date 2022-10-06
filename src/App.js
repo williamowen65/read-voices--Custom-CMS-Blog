@@ -3,7 +3,11 @@ import {
     Routes,
     useParams,
 } from "react-router-dom";
+import PageNotFound from "./pages/404/PageNotFound";
+import About from "./pages/about/About";
 import Auth from "./pages/auth/Auth";
+import Create from "./pages/create/Create";
+import Donate from "./pages/donate/Donate";
 import Home from "./pages/home/Home";
 
 const AppRoutes = () => (
@@ -14,14 +18,6 @@ const AppRoutes = () => (
             element={<Home />}
         />
         <Route path='/auth' element={<Auth />} />
-        {/* <Route
-            path='/story/:slug'
-            element={<Story />}
-        />
-        <Route
-            path='/create'
-            element={<CreateStory />}
-        />
         <Route
             path='/about'
             element={<About />}
@@ -31,9 +27,19 @@ const AppRoutes = () => (
             element={<Donate />}
         />
         <Route
-            path='*'
-            element={<PageNotFound />} */}
+            path='/create'
+            element={<Create />}
         />
+        <Route
+            path='*'
+            element={<PageNotFound />}
+        />
+        {/* <Route
+            path='/story/:slug'
+            element={<Story />}
+        />
+       
+            } */}
     </Routes>
 );
 

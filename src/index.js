@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
@@ -14,6 +14,11 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import FetchStories from "./components/util/FetchStories";
 import AuthStateChange from "./components/util/AuthStateChange";
+// import Dashboard from "./components/dashboard/Dashboard";
+
+const Dashboard = React.lazy(() =>
+    import("./components/dashboard/Dashboard.js")
+);
 
 const root = ReactDOM.createRoot(
     document.getElementById("root")
@@ -25,12 +30,13 @@ const Appp = () => {
     console.log(typeof loggedIn);
     return (
         <div className='outerContainer'>
-            {loggedIn == true ? (
-                <div className='dashboard'>
-                    Dash
-                </div>
-            ) : null}
             <BrowserRouter>
+                {loggedIn == true ? (
+                    <Suspense fallback='loading'>
+                        <Dashboard />
+                    </Suspense>
+                ) : null}
+
                 <div className='mainContainer'>
                     <Header />
 
