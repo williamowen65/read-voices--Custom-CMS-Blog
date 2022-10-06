@@ -1,5 +1,9 @@
 .create {
-    margin: 20px 0;
+    margin: 20px auto;
+    width: 100%;
+    min-height: 100px;
+    max-width: 700px;
+
     input[type="date"] {
         float: right;
     }
@@ -13,6 +17,10 @@
         min-height: 100px;
         max-width: 700px;
         resize: vertical;
+        box-sizing: border-box;
+        padding: 4px;
+        // padding-inline-start: 5px;
+        // padding-inline-end: px;
     }
     .links {
         display: flex;
@@ -28,6 +36,9 @@
             justify-content: center;
             align-items: center;
             transition: all 0.5s;
+            div {
+                translate: 0px -5px;
+            }
             &:hover {
                 box-shadow: 0px 0px 3px black;
             }
@@ -39,6 +50,20 @@
             margin-bottom: 10px;
             input {
                 margin-top: 10px;
+            }
+        }
+    }
+    button {
+        margin-right: 20px;
+        cursor: pointer;
+    }
+    .btnContainer {
+        .delBtn {
+            display: none;
+        }
+        &:hover {
+            .delBtn {
+                display: block;
             }
         }
     }

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import PageNotFound from "../404/PageNotFound";
 import "./create.scss";
+import { CgClose } from "react-icons/cg";
 
 export default function Create() {
     const dispatch = useDispatch();
@@ -32,20 +33,20 @@ export default function Create() {
     }
 
     const setTitleAndDescription = () => {
-        //     const description =
-        //         document.querySelector(
-        //             `#summernote`
-        //         ).value;
-        //     const title =
-        //         document.querySelector(
-        //             `#title`
-        //         ).value;
-        //     setDescription(description);
-        //     setTitle(title);
-        //     return {
-        //         description,
-        //         title,
-        //     };
+        const description =
+            document.querySelector(
+                `#summernote`
+            ).value;
+        const title =
+            document.querySelector(
+                `#title`
+            ).value;
+        setDescription(description);
+        setTitle(title);
+        return {
+            description,
+            title,
+        };
     };
 
     return (
@@ -64,6 +65,7 @@ export default function Create() {
             />
             <textarea
                 className='summernote'
+                placeholder='Description'
                 id='summernote'
             ></textarea>
             <div>
@@ -74,17 +76,18 @@ export default function Create() {
                             type='text'
                             name='text'
                             id='text'
-                            placeholder='text'
+                            placeholder='Label'
                         />
                         <input
                             type='text'
                             name='link'
                             id='link'
-                            placeholder='link'
+                            placeholder='Link to story'
                             autoComplete='off'
                         />
                     </div>
                     <div
+                        className='add'
                         onClick={(e) => {
                             const text =
                                 document.querySelector(
@@ -108,15 +111,19 @@ export default function Create() {
                             }
                         }}
                     >
-                        <div className='add'>
-                            +
-                        </div>
+                        <div>+</div>
                     </div>
                     <div className='newButtons'>
                         {buttons.map((e, i) => (
-                            <button key={i}>
-                                {e.text}
-                            </button>
+                            <div
+                                className='btnContainer'
+                                key={i}
+                            >
+                                <CgClose className='delBtn' />
+                                <button>
+                                    {e.text}
+                                </button>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -126,12 +133,18 @@ export default function Create() {
                 onClick={() => {
                     const { title, description } =
                         setTitleAndDescription();
+
                     if (
                         title &&
                         description &&
                         buttons.length
                     ) {
                         // dispatch(
+                        console.log(
+                            title,
+                            description,
+                            buttons
+                        );
                         //     setNewStoryAndStatus(
                         //         {
                         //             title,
