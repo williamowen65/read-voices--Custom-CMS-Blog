@@ -5,12 +5,13 @@ import styled from "styled-components";
 export default function StoryItem({ story }) {
     return (
         <li>
-            <div className='share'>
+            <div className='shareContainer'>
                 <span className='copyNote'>
                     Link Copied to Clipboard!
                 </span>
                 <BiShareAlt
                     size={20}
+                    className='share'
                     onClick={() => {
                         navigator.clipboard.writeText(
                             window.location
@@ -20,7 +21,7 @@ export default function StoryItem({ story }) {
                         );
                         document
                             .querySelector(
-                                ".share"
+                                ".shareContainer"
                             )
                             .classList.toggle(
                                 "active"
@@ -28,7 +29,7 @@ export default function StoryItem({ story }) {
                         setTimeout(() => {
                             document
                                 .querySelector(
-                                    ".share"
+                                    ".shareContainer"
                                 )
                                 .classList.toggle(
                                     "active"

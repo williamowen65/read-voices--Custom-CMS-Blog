@@ -3,19 +3,25 @@ import styled from "styled-components";
 import "./dashboard.scss";
 import { BsFilter } from "react-icons/bs";
 import { TbPlus } from "react-icons/tb";
-import { useSelector } from "react-redux";
+import {
+    useDispatch,
+    useSelector,
+} from "react-redux";
 import {
     useNavigate,
     useParams,
 } from "react-router-dom";
+import { setIsEditing } from "../../redux/appReducer";
 
 export default function Dashboard() {
+    const dispatch = useDispatch();
     const { stories } = useSelector(
         (state) => state.stories
     );
+
     const navigate = useNavigate();
     const { slug } = useParams();
-    console.log(slug);
+    // console.log(slug);
     return (
         <DashboardStyled id='dashboard'>
             <header>
@@ -43,12 +49,11 @@ export default function Dashboard() {
                             navigate(
                                 `/story/${el.meta.slug}`
                             );
-                            // if (isEditing)
-                            //     dispatch(
-                            //         setIsEditing(
-                            //             false
-                            //         )
-                            //     );
+                            dispatch(
+                                setIsEditing(
+                                    false
+                                )
+                            );
                         }}
                         // className={
                         //     activeSlug ===
