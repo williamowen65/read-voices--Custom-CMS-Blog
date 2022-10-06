@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BiShareAlt } from "react-icons/bi";
 import styled from "styled-components";
 
 export default function StoryItem({ story }) {
+    const shareBtn = useRef();
     return (
         <li>
-            <div className='shareContainer'>
+            <div
+                className='shareContainer'
+                ref={shareBtn}
+            >
                 <span className='copyNote'>
                     Link Copied to Clipboard!
                 </span>
@@ -19,13 +23,9 @@ export default function StoryItem({ story }) {
                                 "/story/" +
                                 story.meta.slug
                         );
-                        document
-                            .querySelector(
-                                ".shareContainer"
-                            )
-                            .classList.toggle(
-                                "active"
-                            );
+                        shareBtn.current.classList.toggle(
+                            "active"
+                        );
                         setTimeout(() => {
                             document
                                 .querySelector(
