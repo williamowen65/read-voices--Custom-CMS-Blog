@@ -16,7 +16,7 @@ function* genIdFn() {
     let count = 0;
     while (true) {
         count++;
-        yield count;
+        yield Math.random() * 100 * 5000;
     }
 }
 const genId = genIdFn();
@@ -86,7 +86,7 @@ export default function Create() {
             <div>
                 <header>Add Links</header>
                 <div className='links'>
-                    <div className='addLinkContainer'>
+                    <form className='addLinkContainer'>
                         <input
                             type='text'
                             name='text'
@@ -100,8 +100,8 @@ export default function Create() {
                             placeholder='Link to story'
                             autoComplete='off'
                         />
-                    </div>
-                    <div
+                    </form>
+                    <button
                         className='add'
                         onClick={(e) => {
                             const text =
@@ -125,16 +125,22 @@ export default function Create() {
                                             .value,
                                     },
                                 ]);
+                                document
+                                    .querySelector(
+                                        ".addLinkContainer"
+                                    )
+                                    .reset();
                             }
                         }}
                     >
                         <div>+</div>
-                    </div>
+                    </button>
                     <div className='newButtons'>
                         {buttons.map((e, i) => (
                             <div
                                 className='btnContainer'
-                                key={i}
+                                key={e.id}
+                                data-id={e.id}
                             >
                                 <CgClose
                                     className='delBtn'
