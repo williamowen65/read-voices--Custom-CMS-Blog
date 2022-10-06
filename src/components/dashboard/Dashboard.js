@@ -4,13 +4,18 @@ import "./dashboard.scss";
 import { BsFilter } from "react-icons/bs";
 import { TbPlus } from "react-icons/tb";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {
+    useNavigate,
+    useParams,
+} from "react-router-dom";
 
 export default function Dashboard() {
     const { stories } = useSelector(
         (state) => state.stories
     );
     const navigate = useNavigate();
+    const { slug } = useParams();
+    console.log(slug);
     return (
         <DashboardStyled id='dashboard'>
             <header>
@@ -35,9 +40,9 @@ export default function Dashboard() {
                         data-slug={el.meta.slug}
                         status={el.meta.status}
                         onClick={() => {
-                            // navigate(
-                            //     `/story/${el.meta.slug}`
-                            // );
+                            navigate(
+                                `/story/${el.meta.slug}`
+                            );
                             // if (isEditing)
                             //     dispatch(
                             //         setIsEditing(

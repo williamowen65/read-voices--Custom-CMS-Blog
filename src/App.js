@@ -9,6 +9,7 @@ import Auth from "./pages/auth/Auth";
 import Create from "./pages/create/Create";
 import Donate from "./pages/donate/Donate";
 import Home from "./pages/home/Home";
+import Story from "./pages/story/Story";
 
 const AppRoutes = () => (
     <Routes>
@@ -34,12 +35,10 @@ const AppRoutes = () => (
             path='*'
             element={<PageNotFound />}
         />
-        {/* <Route
+        <Route
             path='/story/:slug'
             element={<Story />}
         />
-       
-            } */}
     </Routes>
 );
 

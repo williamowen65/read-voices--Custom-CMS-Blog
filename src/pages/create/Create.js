@@ -32,6 +32,12 @@ const isValidUrl = (urlString) => {
         return false;
     }
 };
+const slugify = (str) => {
+    if (str.indexOf(" ") == -1) {
+        return str;
+    }
+    return str.replaceAll(" ", "-").toLowerCase();
+};
 
 export default function Create() {
     const dispatch = useDispatch();
@@ -103,6 +109,7 @@ export default function Create() {
                     return btn;
                 }),
                 status,
+                slug: slugify(title),
             },
         };
 
@@ -293,36 +300,37 @@ export default function Create() {
             </button>
             <button
                 onClick={() => {
+                    handleSave("draft");
                     // const {
                     //     title,
                     //     description,
                     // } =
                     // setTitleAndDescription();
 
-                    if (title) {
-                        // dispatch(
-                        //     setNewStoryAndStatus({
-                        //         title,
-                        //         description,
-                        //         meta: {
-                        //             datePublished:
-                        //                 null,
-                        //             status: "draft",
-                        //             buttons,
-                        //             slug: slugify(
-                        //                 title
-                        //             ),
-                        //         },
-                        //     })
-                        // );
-                        // navigate("/");
-                    } else {
-                        // dispatch(
-                        //     setVerboseLog({
-                        //         title: "must have title to save as draft",
-                        //     })
-                        // );
-                    }
+                    // if (title) {
+                    // dispatch(
+                    //     setNewStoryAndStatus({
+                    //         title,
+                    //         description,
+                    //         meta: {
+                    //             datePublished:
+                    //                 null,
+                    //             status: "draft",
+                    //             buttons,
+                    //             slug: slugify(
+                    //                 title
+                    //             ),
+                    //         },
+                    //     })
+                    // );
+                    // navigate("/");
+                    // } else {
+                    // dispatch(
+                    //     setVerboseLog({
+                    //         title: "must have title to save as draft",
+                    //     })
+                    // );
+                    // }
                 }}
             >
                 Save as Draft
