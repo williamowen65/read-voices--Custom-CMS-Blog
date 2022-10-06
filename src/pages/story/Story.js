@@ -1,24 +1,35 @@
-import React from "react";
+import React, {
+    useEffect,
+    useState,
+} from "react";
 import { BiShareAlt } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import {
+    useDispatch,
+    useSelector,
+} from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import PageNotFound from "../404/PageNotFound";
 import "./story.scss";
 import StoryItem from "./StoryItem";
+import { setIsEditing } from "../../redux/appReducer";
 
 export default function Story() {
+    const dispatch = useDispatch();
     const { slug } = useParams();
     const { stories } = useSelector(
         (state) => state.stories
     );
-    const { loggedIn } = useSelector(
+    const { loggedIn, isEditing } = useSelector(
         (state) => state.app
     );
     const story = stories.filter(
         (story) => story.meta.slug === slug
     )[0];
-    console.log(story);
+
+    const handleEditMode = () => {
+        dispatch(setIsEditing(!isEditing));
+    };
 
     if (story) {
         if (
@@ -29,22 +40,20 @@ export default function Story() {
         }
         return (
             <StoryStyled className='storyPage'>
-                {story.meta.status ===
-                    "draft" && (
-                    <div className='draftBtns'>
-                        <button>Edit</button>
-                        <button>Publish</button>
-                    </div>
-                )}
-                {story.meta.status ===
-                    "public" && (
-                    <div className='draftBtns'>
-                        <button>Edit</button>
-                        <button>
-                            Re-Publish
-                        </button>
-                    </div>
-                )}
+                <div className='draftBtns'>
+                    <button
+                        onClick={handleEditMode}
+                    >
+                        {isEditing
+                            ? story.meta
+                                  .status ===
+                              "draft"
+                                ? "Publish"
+                                : "Re-Publish"
+                            : "Edit"}
+                    </button>
+                </div>
+
                 <ul>
                     <StoryItem story={story} />
                 </ul>
