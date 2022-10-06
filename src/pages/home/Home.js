@@ -7,6 +7,7 @@ import {
     BiShare,
     BiShareAlt,
 } from "react-icons/bi";
+import StoryItem from "../story/StoryItem";
 
 export default function Home() {
     const { stories } = useSelector(
@@ -28,103 +29,9 @@ export default function Home() {
                     )
                     .map((story) => (
                         <Fragment key={story.id}>
-                            <li>
-                                <div className='share'>
-                                    <span className='copyNote'>
-                                        Link
-                                        Copied to
-                                        Clipboard!
-                                    </span>
-                                    <BiShareAlt
-                                        size={20}
-                                        onClick={() => {
-                                            navigator.clipboard.writeText(
-                                                window
-                                                    .location
-                                                    .href +
-                                                    "story/" +
-                                                    story
-                                                        .meta
-                                                        .slug
-                                            );
-                                            document
-                                                .querySelector(
-                                                    ".share"
-                                                )
-                                                .classList.toggle(
-                                                    "active"
-                                                );
-                                            setTimeout(
-                                                () => {
-                                                    document
-                                                        .querySelector(
-                                                            ".share"
-                                                        )
-                                                        .classList.toggle(
-                                                            "active"
-                                                        );
-                                                },
-                                                3000
-                                            );
-                                        }}
-                                    />
-                                </div>
-                                <div className='item'>
-                                    <header className='story'>
-                                        <h2>
-                                            {
-                                                story.title
-                                            }
-                                        </h2>
-                                        <p>
-                                            {story.meta.publishedAt?.slice(
-                                                3
-                                            )}
-                                        </p>
-                                    </header>
-                                    {/* <span> */}
-                                    {
-                                        story.description
-                                    }
-                                    {/* </span> */}
-                                </div>
-                                <div className='buttons'>
-                                    {story.meta
-                                        ?.buttons
-                                        ?.length ? (
-                                        story.meta.buttons.map(
-                                            (
-                                                el,
-                                                i
-                                            ) => (
-                                                <button
-                                                    key={
-                                                        i
-                                                    }
-                                                >
-                                                    <a
-                                                        target='_blank'
-                                                        rel='noreferrer'
-                                                        href={
-                                                            el.link
-                                                        }
-                                                    >
-                                                        {
-                                                            el.text
-                                                        }
-                                                    </a>
-                                                </button>
-                                            )
-                                        )
-                                    ) : (
-                                        <button>
-                                            No
-                                            Links
-                                            shared
-                                        </button>
-                                    )}
-                                </div>
-                            </li>
+                            <StoryItem
+                                story={story}
+                            />
                             <hr />
                         </Fragment>
                     ))}

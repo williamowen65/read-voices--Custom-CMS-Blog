@@ -11,6 +11,12 @@ ul {
                 right: 10px;
                 cursor: pointer;
                 display: none;
+                &.active {
+                    display: block;
+                    .copyNote {
+                        display: inline;
+                    }
+                }
             }
             &:hover {
                 .share {
