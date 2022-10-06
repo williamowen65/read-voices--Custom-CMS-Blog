@@ -42,19 +42,33 @@ export default function Story() {
             <StoryStyled className='storyPage'>
                 {loggedIn && (
                     <div className='draftBtns'>
-                        <button
-                            onClick={
-                                handleEditMode
-                            }
-                        >
-                            {isEditing
-                                ? story.meta
-                                      .status ===
-                                  "draft"
-                                    ? "Publish"
-                                    : "Re-Publish"
-                                : "Edit"}
-                        </button>
+                        {isEditing ? (
+                            <button
+                                onClick={
+                                    handleEditMode
+                                }
+                            >
+                                Cancel
+                            </button>
+                        ) : (
+                            <button
+                                onClick={
+                                    handleEditMode
+                                }
+                            >
+                                Edit
+                            </button>
+                        )}
+                        {story.meta.status ===
+                        "draft" ? (
+                            <button>
+                                Publish
+                            </button>
+                        ) : (
+                            <button>
+                                Re-Publish
+                            </button>
+                        )}
                     </div>
                 )}
 

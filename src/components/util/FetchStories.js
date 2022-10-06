@@ -31,5 +31,5 @@ export default function FetchStories() {
         dispatch(setStories(stories));
         // console.log(stories);
     });
-    return <div></div>;
+    return null;
 }

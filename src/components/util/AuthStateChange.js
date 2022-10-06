@@ -16,5 +16,5 @@ export default function AuthStateChange(props) {
             dispatch(setLoggedIn(false));
         }
     });
-    return <></>;
+    return null;
 }

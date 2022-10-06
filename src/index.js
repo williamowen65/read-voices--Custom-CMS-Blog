@@ -14,6 +14,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import FetchStories from "./components/util/FetchStories";
 import AuthStateChange from "./components/util/AuthStateChange";
+import EditNavAlert from "./components/util/EditNavAlert";
 // import Dashboard from "./components/dashboard/Dashboard";
 
 const Dashboard = React.lazy(() =>
@@ -36,6 +37,7 @@ const Appp = () => {
                         <Dashboard />
                     </Suspense>
                 ) : null}
+                <EditNavAlert />
 
                 <div className='mainContainer'>
                     <Header />
