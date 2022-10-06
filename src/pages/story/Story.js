@@ -40,19 +40,23 @@ export default function Story() {
         }
         return (
             <StoryStyled className='storyPage'>
-                <div className='draftBtns'>
-                    <button
-                        onClick={handleEditMode}
-                    >
-                        {isEditing
-                            ? story.meta
-                                  .status ===
-                              "draft"
-                                ? "Publish"
-                                : "Re-Publish"
-                            : "Edit"}
-                    </button>
-                </div>
+                {loggedIn && (
+                    <div className='draftBtns'>
+                        <button
+                            onClick={
+                                handleEditMode
+                            }
+                        >
+                            {isEditing
+                                ? story.meta
+                                      .status ===
+                                  "draft"
+                                    ? "Publish"
+                                    : "Re-Publish"
+                                : "Edit"}
+                        </button>
+                    </div>
+                )}
 
                 <ul>
                     <StoryItem story={story} />
