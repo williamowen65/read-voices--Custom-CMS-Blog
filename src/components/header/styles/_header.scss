@@ -6,7 +6,19 @@ header.mainHeader {
 #header {
     text-align: center;
     // color: blue;
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     h1 {
+        width: fit-content;
         cursor: pointer;
+    }
+    .logout {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        top: 10px;
     }
 }

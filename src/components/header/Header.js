@@ -1,17 +1,37 @@
 import React from "react";
 import styled from "styled-components";
-import "./styles/index.css";
+import "./styles/_header.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { BiLogOut } from "react-icons/bi";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase-setup";
 
 export default function Header() {
-    const loggedIn = useSelector((state) => {
-        return state.app.loggedIn;
+    const { loggedIn } = useSelector((state) => {
+        return state.app;
     });
-
+    console.log(loggedIn);
     const navigate = useNavigate();
+
+    const handleLogout = (e) => {
+        signOut(auth)
+            .then(() => {
+                console.log("user signed out");
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
     return (
         <HeaderStyled id='header'>
+            {loggedIn && (
+                <BiLogOut
+                    onClick={handleLogout}
+                    className='logout'
+                    size={30}
+                />
+            )}
             <div>
                 <h1
                     className='logo'
@@ -23,8 +43,8 @@ export default function Header() {
                     A brief description of the
                     page
                 </p>
-                <hr />
             </div>
+            <hr />
         </HeaderStyled>
     );
 }

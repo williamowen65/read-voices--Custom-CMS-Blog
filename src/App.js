@@ -3,6 +3,7 @@ import {
     Routes,
     useParams,
 } from "react-router-dom";
+import Auth from "./pages/auth/Auth";
 import Home from "./pages/home/Home";
 
 const AppRoutes = () => (
@@ -12,6 +13,7 @@ const AppRoutes = () => (
             exact
             element={<Home />}
         />
+        <Route path='/auth' element={<Auth />} />
         {/* <Route
             path='/story/:slug'
             element={<Story />}
@@ -20,7 +22,6 @@ const AppRoutes = () => (
             path='/create'
             element={<CreateStory />}
         />
-        <Route path='/auth' element={<Auth />} />
         <Route
             path='/about'
             element={<About />}

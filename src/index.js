@@ -10,6 +10,7 @@ import { store } from "./redux/store";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import FetchStories from "./components/util/FetchStories";
+import AuthStateChange from "./components/util/AuthStateChange";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root")
@@ -18,6 +19,7 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <FetchStories />
+            <AuthStateChange />
             <BrowserRouter>
                 <Header />
 
