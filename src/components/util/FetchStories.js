@@ -17,8 +17,8 @@ export default function FetchStories() {
                     ...story.data().meta,
                     publishedAt: story
                         .data()
-                        .meta.publishedAt.toDate()
-                        .toDateString(),
+                        .meta.publishedAt?.toDate()
+                        ?.toDateString(),
                     createdAt: story
                         .data()
                         .meta.createdAt.toDate()

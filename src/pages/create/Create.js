@@ -11,6 +11,11 @@ import styled from "styled-components";
 import PageNotFound from "../404/PageNotFound";
 import "./create.scss";
 import { CgClose } from "react-icons/cg";
+import {
+    serverTimestamp,
+    addDoc,
+} from "firebase/firestore";
+import { colRef } from "../../firebase-setup";
 
 function* genIdFn() {
     let count = 0;
@@ -20,6 +25,13 @@ function* genIdFn() {
     }
 }
 const genId = genIdFn();
+const isValidUrl = (urlString) => {
+    try {
+        return Boolean(new URL(urlString));
+    } catch (e) {
+        return false;
+    }
+};
 
 export default function Create() {
     const dispatch = useDispatch();
@@ -64,12 +76,55 @@ export default function Create() {
         );
     };
 
+    const handleSave = (status) => {
+        const form = document.querySelector(
+            "form.create"
+        );
+
+        const title = form.title.value;
+        const date = form.date.value;
+        const description =
+            form.description.value;
+
+        const doc = {
+            title,
+            description,
+            meta: {
+                createdAt: serverTimestamp(),
+                publishedAt: date
+                    ? serverTimestamp().fromDate(
+                          new Date(date)
+                      )
+                    : null,
+                buttons: buttons.map((btn) => {
+                    delete btn.id;
+                    return btn;
+                }),
+                status,
+            },
+        };
+
+        addDoc(colRef, doc)
+            .then((res) => {
+                console.log("success");
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
+        console.log(doc, colRef);
+    };
+
     return (
-        <div className='storyStyle create'>
+        <form
+            className='storyStyle create'
+            onSubmit={(e) => e.preventDefault()}
+        >
             <input
                 placeholder='Title'
                 autoComplete='off'
                 type='text'
+                name='title'
                 id='title'
             />
             <input
@@ -77,16 +132,18 @@ export default function Create() {
                 autoComplete='off'
                 type='date'
                 id='date'
+                name='date'
             />
             <textarea
                 className='summernote'
                 placeholder='Description'
                 id='summernote'
+                name='description'
             ></textarea>
             <div>
                 <header>Add Links</header>
                 <div className='links'>
-                    <form className='addLinkContainer'>
+                    <div className='addLinkContainer'>
                         <input
                             type='text'
                             name='text'
@@ -99,8 +156,12 @@ export default function Create() {
                             id='link'
                             placeholder='Link to story'
                             autoComplete='off'
+                            onClick={(e) => {
+                                e.target.value =
+                                    "https://www.";
+                            }}
                         />
-                    </form>
+                    </div>
                     <button
                         className='add'
                         onClick={(e) => {
@@ -112,9 +173,13 @@ export default function Create() {
                                 document.querySelector(
                                     "input#link"
                                 ).value;
-                            if (link && text) {
-                                /* Add a check that the link works, just ping it */
 
+                            if (
+                                isValidUrl(
+                                    link
+                                ) &&
+                                text
+                            ) {
                                 setTitleAndDescription();
                                 setButtons([
                                     ...buttons,
@@ -125,12 +190,19 @@ export default function Create() {
                                             .value,
                                     },
                                 ]);
-                                document
-                                    .querySelector(
-                                        ".addLinkContainer"
-                                    )
-                                    .reset();
+                                document.querySelector(
+                                    "input#text"
+                                ).value = "";
+                                document.querySelector(
+                                    "input#link"
+                                ).value =
+                                    "https://www.";
+                            } else {
+                                console.log(
+                                    "That is not a real link to"
+                                );
                             }
+                            // }
                         }}
                     >
                         <div>+</div>
@@ -151,7 +223,15 @@ export default function Create() {
                                     }
                                 />
                                 <button>
-                                    {e.text}
+                                    <a
+                                        href={
+                                            e.link
+                                        }
+                                        target='_blank'
+                                        rel='noreferrer'
+                                    >
+                                        {e.text}
+                                    </a>
                                 </button>
                             </div>
                         ))}
@@ -160,50 +240,52 @@ export default function Create() {
             </div>
 
             <button
-                onClick={() => {
-                    const { title, description } =
-                        setTitleAndDescription();
+                onClick={() =>
+                    handleSave("public")
+                }
+                // const { title, description } =
+                //     setTitleAndDescription();
 
-                    if (
-                        title &&
-                        description &&
-                        buttons.length
-                    ) {
-                        // dispatch(
-                        console.log(
-                            title,
-                            description,
-                            buttons
-                        );
-                        //     setNewStoryAndStatus(
-                        //         {
-                        //             title,
-                        //             description,
-                        //             meta: {
-                        //                 datePublished:
-                        //                     new Date()
-                        //                         .toDateString()
-                        //                         .slice(
-                        //                             4
-                        //                         ),
-                        //                 status: "public",
-                        //                 buttons,
-                        //                 slug: slugify(
-                        //                     title
-                        //                 ),
-                        //             },
-                        //         }
-                        //     )
-                        // );
-                        // navigate("/");
-                    } else {
-                        // dispatch(
-                        //     setVerboseLog({
-                        //         title: "must have title, description, and at least one button to publish",
-                        //     })
-                        // );
-                    }
-                }}
+                // if (
+                //     title &&
+                //     description &&
+                //     buttons.length
+                // ) {
+                //     // dispatch(
+                //     console.log(
+                //         title,
+                //         description,
+                //         buttons
+                //     );
+                //     setNewStoryAndStatus(
+                //         {
+                //             title,
+                //             description,
+                //             meta: {
+                //                 datePublished:
+                //                     new Date()
+                //                         .toDateString()
+                //                         .slice(
+                //                             4
+                //                         ),
+                //                 status: "public",
+                //                 buttons,
+                //                 slug: slugify(
+                //                     title
+                //                 ),
+                //             },
+                //         }
+                //     )
+                // );
+                // navigate("/");
+                // } else {
+                // dispatch(
+                //     setVerboseLog({
+                //         title: "must have title, description, and at least one button to publish",
+                //     })
+                // );
+                // }
+                // }
             >
                 Publish
             </button>
@@ -243,7 +325,7 @@ export default function Create() {
             >
                 Save as Draft
             </button>
-        </div>
+        </form>
     );
 }
 // const CreateStyled = styled.div``;

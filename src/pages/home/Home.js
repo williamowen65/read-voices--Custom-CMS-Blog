@@ -33,7 +33,7 @@ export default function Home() {
                                             }
                                         </h2>
                                         <p>
-                                            {story.meta.publishedAt.slice(
+                                            {story.meta.publishedAt?.slice(
                                                 3
                                             )}
                                         </p>
