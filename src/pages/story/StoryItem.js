@@ -55,15 +55,16 @@ export default function StoryItem({ story }) {
                 {story.meta?.buttons?.length ? (
                     story.meta.buttons.map(
                         (el, i) => (
-                            <button key={i}>
-                                <a
-                                    target='_blank'
-                                    rel='noreferrer'
-                                    href={el.link}
-                                >
+                            <a
+                                target='_blank'
+                                rel='noreferrer'
+                                href={el.link}
+                                key={i}
+                            >
+                                <button>
                                     {el.text}
-                                </a>
-                            </button>
+                                </button>
+                            </a>
                         )
                     )
                 ) : (

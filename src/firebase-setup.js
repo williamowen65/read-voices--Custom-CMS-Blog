@@ -46,3 +46,8 @@ export const auth = getAuth();
 // collection ref
 
 export const colRef = collection(db, "stories");
+
+export const orderedCol = query(
+    colRef,
+    orderBy("meta.createdAt", "desc")
+);
