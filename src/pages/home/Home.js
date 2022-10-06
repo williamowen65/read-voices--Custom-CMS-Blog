@@ -9,7 +9,7 @@ export default function Home() {
         (state) => state.stories
     );
 
-    if (stories.length === 0 || true) {
+    if (stories.length === 0) {
         return <LoadingSpinner />;
     }
 
@@ -28,6 +28,12 @@ export default function Home() {
                                 <h2>
                                     {story.title}
                                 </h2>
+                                <br></br>
+                                <p>
+                                    {story.meta.publishedAt.slice(
+                                        3
+                                    )}
+                                </p>
                             </header>
                             <hr />
                         </li>

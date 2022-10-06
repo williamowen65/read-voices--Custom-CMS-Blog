@@ -17,16 +17,19 @@ export default function FetchStories() {
                     ...story.data().meta,
                     publishedAt: story
                         .data()
-                        .meta.publishedAt.valueOf(),
+                        .meta.publishedAt.toDate()
+                        .toDateString(),
                     createdAt: story
                         .data()
-                        .meta.createdAt.valueOf(),
+                        .meta.createdAt.toDate()
+                        .toDateString(),
                 },
                 id: story.id,
             });
+            // console.log(story.data());
         });
         dispatch(setStories(stories));
-        console.log(stories);
+        // console.log(stories);
     });
     return <div></div>;
 }
