@@ -95,6 +95,8 @@ export default function Create() {
                     ? serverTimestamp().fromDate(
                           new Date(date)
                       )
+                    : status === "public"
+                    ? serverTimestamp()
                     : null,
                 buttons: buttons.map((btn) => {
                     delete btn.id;
