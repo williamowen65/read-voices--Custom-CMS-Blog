@@ -58,12 +58,18 @@
         cursor: pointer;
     }
     .btnContainer {
+        display: flex;
+        position: relative;
         .delBtn {
             display: none;
         }
         &:hover {
             .delBtn {
                 display: block;
+                position: absolute;
+                right: -5px;
+                top: 3px;
+                cursor: pointer;
             }
         }
     }

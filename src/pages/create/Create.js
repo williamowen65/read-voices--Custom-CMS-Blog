@@ -12,6 +12,15 @@ import PageNotFound from "../404/PageNotFound";
 import "./create.scss";
 import { CgClose } from "react-icons/cg";
 
+function* genIdFn() {
+    let count = 0;
+    while (true) {
+        count++;
+        yield count;
+    }
+}
+const genId = genIdFn();
+
 export default function Create() {
     const dispatch = useDispatch();
     const { loggedIn } = useSelector(
@@ -47,6 +56,12 @@ export default function Create() {
             description,
             title,
         };
+    };
+
+    const handleDelBtn = (id) => {
+        setButtons(
+            buttons.filter((el) => el.id !== id)
+        );
     };
 
     return (
@@ -106,6 +121,8 @@ export default function Create() {
                                     {
                                         text,
                                         link,
+                                        id: genId.next()
+                                            .value,
                                     },
                                 ]);
                             }
@@ -119,7 +136,14 @@ export default function Create() {
                                 className='btnContainer'
                                 key={i}
                             >
-                                <CgClose className='delBtn' />
+                                <CgClose
+                                    className='delBtn'
+                                    onClick={() =>
+                                        handleDelBtn(
+                                            e.id
+                                        )
+                                    }
+                                />
                                 <button>
                                     {e.text}
                                 </button>
