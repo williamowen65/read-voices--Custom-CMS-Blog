@@ -1,4 +1,8 @@
+@import "../../../mixins/CardStyle.scss";
 ul {
     list-style-type: none;
     padding-inline-start: 0;
+    li {
+        @include StoryLayout();
+    }
 }

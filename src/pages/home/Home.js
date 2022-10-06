@@ -24,18 +24,27 @@ export default function Home() {
                     )
                     .map((story) => (
                         <li key={story.id}>
-                            <header className='story'>
-                                <h2>
-                                    {story.title}
-                                </h2>
-                                <br></br>
-                                <p>
-                                    {story.meta.publishedAt.slice(
-                                        3
-                                    )}
-                                </p>
-                            </header>
-                            <hr />
+                            <div className='item'>
+                                <header className='story'>
+                                    <h2>
+                                        {
+                                            story.title
+                                        }
+                                    </h2>
+                                    <br></br>
+                                    <p>
+                                        {story.meta.publishedAt.slice(
+                                            3
+                                        )}
+                                    </p>
+                                </header>
+                                {/* <span> */}
+                                {
+                                    story.description
+                                }
+                                {/* </span> */}
+                                {/* <hr /> */}
+                            </div>
                         </li>
                     ))}
             </ul>
