@@ -27,13 +27,12 @@ export default function StoryItem({ story }) {
                             "active"
                         );
                         setTimeout(() => {
-                            document
-                                .querySelector(
-                                    ".shareContainer"
-                                )
-                                .classList.toggle(
-                                    "active"
-                                );
+                            console.log(
+                                shareBtn.current
+                            );
+                            shareBtn.current.classList.toggle(
+                                "active"
+                            );
                         }, 3000);
                     }}
                 />
