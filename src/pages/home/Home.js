@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Fragment, Suspense } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import LoadingSpinner from "../../components/UX/Spinner";
@@ -23,29 +23,66 @@ export default function Home() {
                             "public"
                     )
                     .map((story) => (
-                        <li key={story.id}>
-                            <div className='item'>
-                                <header className='story'>
-                                    <h2>
-                                        {
-                                            story.title
-                                        }
-                                    </h2>
-                                    <br></br>
-                                    <p>
-                                        {story.meta.publishedAt.slice(
-                                            3
-                                        )}
-                                    </p>
-                                </header>
-                                {/* <span> */}
-                                {
-                                    story.description
-                                }
-                                {/* </span> */}
-                                {/* <hr /> */}
-                            </div>
-                        </li>
+                        <Fragment key={story.id}>
+                            <li>
+                                <div className='item'>
+                                    <header className='story'>
+                                        <h2>
+                                            {
+                                                story.title
+                                            }
+                                        </h2>
+                                        <p>
+                                            {story.meta.publishedAt.slice(
+                                                3
+                                            )}
+                                        </p>
+                                    </header>
+                                    {/* <span> */}
+                                    {
+                                        story.description
+                                    }
+                                    {/* </span> */}
+                                </div>
+                                <div className='buttons'>
+                                    {story.meta
+                                        ?.buttons
+                                        ?.length ? (
+                                        story.meta.buttons.map(
+                                            (
+                                                el,
+                                                i
+                                            ) => (
+                                                <button
+                                                    key={
+                                                        i
+                                                    }
+                                                >
+                                                    <a
+                                                        target='_blank'
+                                                        rel='noreferrer'
+                                                        href={
+                                                            el.link
+                                                        }
+                                                    >
+                                                        {
+                                                            el.text
+                                                        }
+                                                    </a>
+                                                </button>
+                                            )
+                                        )
+                                    ) : (
+                                        <button>
+                                            No
+                                            Links
+                                            shared
+                                        </button>
+                                    )}
+                                </div>
+                            </li>
+                            <hr />
+                        </Fragment>
                     ))}
             </ul>
         </HomeStyled>

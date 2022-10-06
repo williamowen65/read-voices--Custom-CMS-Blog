@@ -3,12 +3,12 @@
     flex-direction: column;
     min-width: 100%;
     .item {
-        flex-grow: 1;
+        // flex-grow: 1;
         // display: flex;
         // border-top: 2px solid black;
-        min-width: 100%;
+        // min-width: 100vw;
         flex-direction: column;
-        padding-top: 10px;
+        padding: 10px 10px 0px;
         header {
             display: flex;
             flex-direction: column;
@@ -27,6 +27,7 @@
             h2,
             p {
                 display: inline;
+                margin: 0;
             }
             p {
                 white-space: no-wrap;
