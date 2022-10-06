@@ -6,8 +6,10 @@ import {
     signOut,
 } from "firebase/auth";
 import { auth } from "../../firebase-setup.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
+    const nav = useNavigate();
     const handleLogin = (e) => {
         e.preventDefault();
         const loginForm = e.target;
@@ -22,6 +24,7 @@ export default function Auth() {
         )
             .then((cred) => {
                 loginForm.reset();
+                nav("/");
             })
             .catch((err) => {
                 console.log(err.message);

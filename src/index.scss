@@ -18,3 +18,12 @@ body {
     /* flex-grow: 1;
     display: flex; */
 }
+
+.outerContainer {
+    display: flex;
+    min-height: 100vh;
+    .mainContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}

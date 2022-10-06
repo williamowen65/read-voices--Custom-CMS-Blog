@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./index.scss";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
+import {
+    Provider,
+    useSelector,
+} from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import "./firebase-setup";
 import { store } from "./redux/store";
@@ -15,17 +18,35 @@ import AuthStateChange from "./components/util/AuthStateChange";
 const root = ReactDOM.createRoot(
     document.getElementById("root")
 );
+const Appp = () => {
+    const { loggedIn } = useSelector(
+        (state) => state.app
+    );
+    console.log(typeof loggedIn);
+    return (
+        <div className='outerContainer'>
+            {loggedIn == true ? (
+                <div className='dashboard'>
+                    Dash
+                </div>
+            ) : null}
+            <BrowserRouter>
+                <div className='mainContainer'>
+                    <Header />
+
+                    <App />
+                    <Footer />
+                </div>
+            </BrowserRouter>
+        </div>
+    );
+};
 root.render(
     <React.StrictMode>
         <Provider store={store}>
             <FetchStories />
             <AuthStateChange />
-            <BrowserRouter>
-                <Header />
-
-                <App />
-                <Footer />
-            </BrowserRouter>
+            <Appp />
         </Provider>
     </React.StrictMode>
 );
