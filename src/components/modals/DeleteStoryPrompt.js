@@ -77,16 +77,16 @@ export default function DeleteStoryPrompt({
                 />
                 <div className='btns'>
                     <button
-                        className='cancel'
-                        onClick={cancel}
-                    >
-                        Cancel
-                    </button>
-                    <button
                         className='confirm'
                         onClick={handleDelete}
                     >
                         Confirm Delete
+                    </button>
+                    <button
+                        className='cancel'
+                        onClick={cancel}
+                    >
+                        Cancel
                     </button>
                 </div>
             </form>

@@ -3,7 +3,9 @@ import React, {
     useState,
 } from "react";
 import { CgClose } from "react-icons/cg";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { setButtonsForStory } from "../../redux/storyReducer";
 const isValidUrl = (urlString) => {
     try {
         return Boolean(new URL(urlString));
@@ -22,6 +24,7 @@ export function FormTemplate({
     handleSave,
     story,
 }) {
+    const dispatch = useDispatch();
     const [buttons, setButtons] = useState([]);
     // console.log("editing: ", story);
     const location = useLocation();
@@ -36,6 +39,12 @@ export function FormTemplate({
                 `#title`
             ).value = story.title;
             setButtons(story.buttons);
+
+            document.querySelector(
+                "#date"
+            ).valueAsDate = new Date(
+                story.meta.publishedAt
+            );
         }
     }, []);
 
@@ -59,6 +68,56 @@ export function FormTemplate({
         setButtons(
             buttons.filter((el) => el.id !== id)
         );
+    };
+
+    const handleAddBtn = () => {
+        const text =
+            document.querySelector(
+                "input#text"
+            ).value;
+        const link =
+            document.querySelector(
+                "input#link"
+            ).value;
+
+        if (isValidUrl(link) && text) {
+            setTitleAndDescription();
+            if (story) {
+                // alert("hi");
+                dispatch(
+                    setButtonsForStory({
+                        slug: story.slug,
+                        buttons: [
+                            ...story.buttons,
+                            {
+                                text,
+                                link,
+                            },
+                        ],
+                    })
+                );
+            }
+            setButtons([
+                ...buttons,
+                {
+                    text,
+                    link,
+                    id: genId.next().value,
+                },
+            ]);
+
+            document.querySelector(
+                "input#text"
+            ).value = "";
+            document.querySelector(
+                "input#link"
+            ).value = "https://www.";
+        } else {
+            console.error(
+                "That is not a real link to anything"
+            );
+        }
+        // }
     };
 
     return (
@@ -110,46 +169,7 @@ export function FormTemplate({
                     </div>
                     <button
                         className='add'
-                        onClick={(e) => {
-                            const text =
-                                document.querySelector(
-                                    "input#text"
-                                ).value;
-                            const link =
-                                document.querySelector(
-                                    "input#link"
-                                ).value;
-
-                            if (
-                                isValidUrl(
-                                    link
-                                ) &&
-                                text
-                            ) {
-                                setTitleAndDescription();
-                                setButtons([
-                                    ...buttons,
-                                    {
-                                        text,
-                                        link,
-                                        id: genId.next()
-                                            .value,
-                                    },
-                                ]);
-                                document.querySelector(
-                                    "input#text"
-                                ).value = "";
-                                document.querySelector(
-                                    "input#link"
-                                ).value =
-                                    "https://www.";
-                            } else {
-                                console.error(
-                                    "That is not a real link to anything"
-                                );
-                            }
-                            // }
-                        }}
+                        onClick={handleAddBtn}
                     >
                         <div>+</div>
                     </button>

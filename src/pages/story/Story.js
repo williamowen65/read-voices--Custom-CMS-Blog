@@ -63,6 +63,30 @@ export default function Story() {
             "stories",
             story.id
         );
+
+        console.log("STATEUS: ", status);
+        if (status === "public") {
+            if (
+                !story.title ||
+                !story.description ||
+                !story.buttons.length
+            ) {
+                alert(
+                    "Hey man, You can only publish this if you have a title, description, and at least one button"
+                );
+                return;
+            }
+            if (!story.meta.publishedAt) {
+                // eslint-disable-next-line no-restricted-globals
+                const res = confirm(
+                    "You provided no publish date. Do you want to just use today as the date? You can change it later."
+                );
+                if (!res) {
+                    return;
+                }
+            }
+        }
+
         updateDoc(docRef, {
             status: status,
         })
