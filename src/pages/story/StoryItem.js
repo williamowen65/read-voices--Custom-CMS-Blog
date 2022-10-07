@@ -27,9 +27,6 @@ export default function StoryItem({ story }) {
                             "active"
                         );
                         setTimeout(() => {
-                            console.log(
-                                shareBtn.current
-                            );
                             shareBtn.current.classList.toggle(
                                 "active"
                             );

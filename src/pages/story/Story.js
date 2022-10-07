@@ -1,4 +1,5 @@
 import React, {
+    Suspense,
     useEffect,
     useState,
 } from "react";
@@ -14,6 +15,11 @@ import "./story.scss";
 import StoryItem from "./StoryItem";
 import { setIsEditing } from "../../redux/appReducer";
 import LoadingSpinner from "../../components/UX/Spinner";
+const DeleteStoryPrompt = React.lazy(() =>
+    import(
+        "../../components/modals/DeleteStoryPrompt"
+    )
+);
 
 export default function Story() {
     const dispatch = useDispatch();
@@ -27,14 +33,21 @@ export default function Story() {
     const story = stories.filter(
         (story) => story.meta.slug === slug
     )[0];
+    const [showDelPrompt, setShowDelPrompt] =
+        useState(false);
+    const handleDelPrompt = () => {
+        setShowDelPrompt(true);
+    };
+    const handleCancelDel = () => {
+        setShowDelPrompt(false);
+    };
+    const handleEditMode = () => {
+        dispatch(setIsEditing(!isEditing));
+    };
 
     if (stories.length === 0) {
         return <LoadingSpinner />;
     }
-
-    const handleEditMode = () => {
-        dispatch(setIsEditing(!isEditing));
-    };
 
     if (story) {
         if (
@@ -45,36 +58,56 @@ export default function Story() {
         }
         return (
             <StoryStyled className='storyPage'>
+                <Suspense>
+                    {showDelPrompt ? (
+                        <DeleteStoryPrompt
+                            story={story}
+                            cancel={
+                                handleCancelDel
+                            }
+                        />
+                    ) : null}
+                </Suspense>
                 {loggedIn && (
-                    <div className='draftBtns'>
-                        {isEditing ? (
-                            <button
-                                onClick={
-                                    handleEditMode
-                                }
-                            >
-                                Cancel
-                            </button>
-                        ) : (
-                            <button
-                                onClick={
-                                    handleEditMode
-                                }
-                            >
-                                Edit
-                            </button>
-                        )}
-                        {story.meta.status ===
-                        "draft" ? (
-                            <button>
-                                Publish
-                            </button>
-                        ) : (
-                            <button>
-                                Re-Publish
-                            </button>
-                        )}
-                    </div>
+                    <>
+                        <div className='draftBtns'>
+                            {isEditing ? (
+                                <button
+                                    onClick={
+                                        handleEditMode
+                                    }
+                                >
+                                    Cancel
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={
+                                        handleEditMode
+                                    }
+                                >
+                                    Edit
+                                </button>
+                            )}
+                            {story.meta.status ===
+                            "draft" ? (
+                                <button>
+                                    Publish
+                                </button>
+                            ) : (
+                                <button>
+                                    Re-Publish
+                                </button>
+                            )}
+                        </div>
+                        <button
+                            className='delBtn'
+                            onClick={
+                                handleDelPrompt
+                            }
+                        >
+                            Delete
+                        </button>
+                    </>
                 )}
 
                 <ul>

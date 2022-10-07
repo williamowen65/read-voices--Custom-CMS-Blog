@@ -11,7 +11,6 @@ export default function Header() {
     const { loggedIn } = useSelector((state) => {
         return state.app;
     });
-    console.log(loggedIn);
     const navigate = useNavigate();
 
     const handleLogout = (e) => {

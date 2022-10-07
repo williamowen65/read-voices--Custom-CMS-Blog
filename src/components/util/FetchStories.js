@@ -14,7 +14,6 @@ export default function FetchStories() {
         onSnapshot(orderedCol, (snapshot) => {
             let stories = [];
             snapshot.docs.forEach((story) => {
-                console.log(story.data());
                 stories.push({
                     ...story.data(),
                     meta: {
@@ -30,10 +29,8 @@ export default function FetchStories() {
                     },
                     id: story.id,
                 });
-                // console.log(story.data());
             });
             dispatch(setStories(stories));
-            // console.log(stories);
         });
     } catch (error) {
         console.error(error);

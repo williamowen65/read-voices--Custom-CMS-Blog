@@ -28,7 +28,6 @@ const Appp = () => {
     const { loggedIn } = useSelector(
         (state) => state.app
     );
-    console.log(typeof loggedIn);
     return (
         <div className='outerContainer'>
             <BrowserRouter>

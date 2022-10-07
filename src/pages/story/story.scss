@@ -10,4 +10,12 @@
             cursor: pointer;
         }
     }
+    .delBtn {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: rgb(223, 125, 125);
+        border-style: dashed;
+        cursor: pointer;
+    }
 }

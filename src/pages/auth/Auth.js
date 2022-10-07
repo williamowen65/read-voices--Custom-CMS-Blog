@@ -28,7 +28,7 @@ export default function Auth() {
                 nav("/");
             })
             .catch((err) => {
-                console.log(err.message);
+                console.error(err.message);
             });
     };
 

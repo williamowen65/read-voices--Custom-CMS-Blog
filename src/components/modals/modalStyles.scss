@@ -1,0 +1,27 @@
+form.deletePrompt {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    input {
+        margin-bottom: 20px;
+        line-height: 30px;
+        border: 1px solid black;
+        padding-inline: 10px;
+    }
+    .btns {
+        width: fit-content;
+        display: flex;
+        justify-content: space-between;
+        // align-items: center;
+        width: 100%;
+        button {
+            cursor: pointer;
+            &:disabled {
+                cursor: default;
+            }
+        }
+    }
+}
+h4 {
+    text-align: center;
+}

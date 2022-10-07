@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 export default function Footer() {
     const location = useLocation();
-    console.log(location);
     const { loggedIn } = useSelector(
         (state) => state.app
     );

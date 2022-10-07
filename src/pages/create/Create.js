@@ -143,7 +143,7 @@ export default function Create() {
 
         addDoc(colRef, doc)
             .then((res) => {
-                console.log("success");
+                console.log("success saving doc");
                 navigate("/");
             })
             .catch((err) => {
@@ -236,8 +236,8 @@ export default function Create() {
                                 ).value =
                                     "https://www.";
                             } else {
-                                console.log(
-                                    "That is not a real link to"
+                                console.error(
+                                    "That is not a real link to anything"
                                 );
                             }
                             // }

@@ -21,7 +21,6 @@ export default function Dashboard() {
 
     const navigate = useNavigate();
     const { slug } = useParams();
-    // console.log(slug);
     return (
         <DashboardStyled id='dashboard'>
             <header>
