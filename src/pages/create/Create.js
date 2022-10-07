@@ -13,8 +13,8 @@ import "./create.scss";
 import { CgClose } from "react-icons/cg";
 import {
     serverTimestamp,
-    addDoc,
     Timestamp,
+    addDoc,
 } from "firebase/firestore";
 import { colRef } from "../../firebase-setup";
 
@@ -32,8 +32,8 @@ const isValidUrl = (urlString) => {
     }
 };
 const slugify = (str) => {
-    if (str.indexOf(" ") == -1) {
-        return str;
+    if (str.indexOf(" ") === -1) {
+        return str.toLowerCase();
     }
     return str.replaceAll(" ", "-").toLowerCase();
 };
@@ -133,7 +133,7 @@ export default function Create() {
             meta: {
                 createdAt: serverTimestamp(),
                 publishedAt: date
-                    ? serverTimestamp().fromDate(
+                    ? Timestamp.fromDate(
                           new Date(date)
                       )
                     : status === "public"
