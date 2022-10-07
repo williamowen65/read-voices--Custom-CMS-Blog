@@ -41,7 +41,7 @@ export default function Dashboard() {
             <ul className='dash'>
                 {stories.map((el, i) => (
                     <LiStyled
-                        key={i}
+                        key={el.id}
                         data-id={el.id}
                         data-slug={el.meta.slug}
                         status={el.meta.status}
