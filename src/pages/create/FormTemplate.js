@@ -1,0 +1,182 @@
+import React, { useState } from "react";
+import { CgClose } from "react-icons/cg";
+const isValidUrl = (urlString) => {
+    try {
+        return Boolean(new URL(urlString));
+    } catch (e) {
+        return false;
+    }
+};
+function* genIdFn() {
+    while (true) {
+        yield Math.random() * 100 * 5000;
+    }
+}
+const genId = genIdFn();
+
+export function FormTemplate({ handleSave }) {
+    const [buttons, setButtons] = useState([]);
+
+    const setTitleAndDescription = () => {
+        const description =
+            document.querySelector(
+                `#summernote`
+            ).value;
+        const title =
+            document.querySelector(
+                `#title`
+            ).value;
+
+        return {
+            description,
+            title,
+        };
+    };
+
+    const handleDelBtn = (id) => {
+        setButtons(
+            buttons.filter((el) => el.id !== id)
+        );
+    };
+
+    return (
+        <form
+            className='storyStyle create'
+            onSubmit={(e) => e.preventDefault()}
+        >
+            <input
+                placeholder='Title'
+                autoComplete='off'
+                type='text'
+                name='title'
+                id='title'
+            />
+            <input
+                placeholder='Publish date'
+                autoComplete='off'
+                type='date'
+                id='date'
+                name='date'
+            />
+            <textarea
+                className='summernote'
+                placeholder='Description'
+                id='summernote'
+                name='description'
+            ></textarea>
+            <div>
+                <header>Add Links</header>
+                <div className='links'>
+                    <div className='addLinkContainer'>
+                        <input
+                            type='text'
+                            name='text'
+                            id='text'
+                            placeholder='Label'
+                        />
+                        <input
+                            type='text'
+                            name='link'
+                            id='link'
+                            placeholder='Link to story'
+                            autoComplete='off'
+                            onClick={(e) => {
+                                e.target.value =
+                                    "https://www.";
+                            }}
+                        />
+                    </div>
+                    <button
+                        className='add'
+                        onClick={(e) => {
+                            const text =
+                                document.querySelector(
+                                    "input#text"
+                                ).value;
+                            const link =
+                                document.querySelector(
+                                    "input#link"
+                                ).value;
+
+                            if (
+                                isValidUrl(
+                                    link
+                                ) &&
+                                text
+                            ) {
+                                setTitleAndDescription();
+                                setButtons([
+                                    ...buttons,
+                                    {
+                                        text,
+                                        link,
+                                        id: genId.next()
+                                            .value,
+                                    },
+                                ]);
+                                document.querySelector(
+                                    "input#text"
+                                ).value = "";
+                                document.querySelector(
+                                    "input#link"
+                                ).value =
+                                    "https://www.";
+                            } else {
+                                console.error(
+                                    "That is not a real link to anything"
+                                );
+                            }
+                            // }
+                        }}
+                    >
+                        <div>+</div>
+                    </button>
+                    <div className='newButtons'>
+                        {buttons.map((e, i) => (
+                            <div
+                                className='btnContainer'
+                                key={e.id}
+                                data-id={e.id}
+                            >
+                                <CgClose
+                                    className='delBtn'
+                                    onClick={() =>
+                                        handleDelBtn(
+                                            e.id
+                                        )
+                                    }
+                                />
+                                <button>
+                                    <a
+                                        href={
+                                            e.link
+                                        }
+                                        target='_blank'
+                                        rel='noreferrer'
+                                    >
+                                        {e.text}
+                                    </a>
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <button
+                onClick={() =>
+                    handleSave("public")
+                }
+            >
+                Publish
+            </button>
+            <button
+                onClick={() => {
+                    handleSave("draft");
+                }}
+            >
+                Save as Draft
+            </button>
+        </form>
+    );
+}

@@ -17,20 +17,8 @@ import {
     addDoc,
 } from "firebase/firestore";
 import { colRef } from "../../firebase-setup";
+import { FormTemplate } from "./FormTemplate";
 
-function* genIdFn() {
-    while (true) {
-        yield Math.random() * 100 * 5000;
-    }
-}
-const genId = genIdFn();
-const isValidUrl = (urlString) => {
-    try {
-        return Boolean(new URL(urlString));
-    } catch (e) {
-        return false;
-    }
-};
 const slugify = (str) => {
     if (str.indexOf(" ") === -1) {
         return str.toLowerCase();
@@ -50,322 +38,86 @@ export default function Create() {
     // const [description, setDescription] =
     //     useState();
 
-    const [buttons, setButtons] = useState([]);
-
     if (!loggedIn) {
         return <PageNotFound />;
     }
 
-    const setTitleAndDescription = () => {
-        const description =
-            document.querySelector(
-                `#summernote`
-            ).value;
-        const title =
-            document.querySelector(
-                `#title`
-            ).value;
+    // const handleSave = (status) => {
+    //     const form = document.querySelector(
+    //         "form.create"
+    //     );
 
-        return {
-            description,
-            title,
-        };
-    };
+    //     const title = form.title.value;
+    //     const date = form.date.value;
+    //     const description =
+    //         form.description.value;
 
-    const handleDelBtn = (id) => {
-        setButtons(
-            buttons.filter((el) => el.id !== id)
-        );
-    };
+    //     if (status === "draft") {
+    //         if (!title) {
+    //             alert(
+    //                 "Must provide a title to save a draft"
+    //             );
+    //             return;
+    //         }
+    //     }
+    //     if (status === "public") {
+    //         if (
+    //             !title ||
+    //             !description ||
+    //             !buttons.length
+    //         ) {
+    //             alert(
+    //                 "Must provide a title, description, and at least one button to make publish"
+    //             );
+    //             return;
+    //         }
+    //         if (!date) {
+    //             // eslint-disable-next-line no-restricted-globals
+    //             const res = confirm(
+    //                 "You provided no publish date. Do you want to just use today as the date? You can change it later."
+    //             );
+    //             if (!res) {
+    //                 return;
+    //             }
+    //         }
+    //     }
 
-    const handleSave = (status) => {
-        const form = document.querySelector(
-            "form.create"
-        );
+    //     // console.log(serverTimestamp);
 
-        const title = form.title.value;
-        const date = form.date.value;
-        const description =
-            form.description.value;
+    //     const doc = {
+    //         title,
+    //         description,
+    //         status,
+    //         buttons: buttons.map((btn) => {
+    //             delete btn.id;
+    //             return btn;
+    //         }),
 
-        if (status === "draft") {
-            if (!title) {
-                alert(
-                    "Must provide a title to save a draft"
-                );
-                return;
-            }
-        }
-        if (status === "public") {
-            if (
-                !title ||
-                !description ||
-                !buttons.length
-            ) {
-                alert(
-                    "Must provide a title, description, and at least one button to make publish"
-                );
-                return;
-            }
-            if (!date) {
-                // eslint-disable-next-line no-restricted-globals
-                const res = confirm(
-                    "You provided no publish date. Do you want to just use today as the date? You can change it later."
-                );
-                if (!res) {
-                    return;
-                }
-            }
-        }
+    //         slug: slugify(title),
+    //         meta: {
+    //             createdAt: serverTimestamp(),
+    //             publishedAt: date
+    //                 ? Timestamp.fromDate(
+    //                       new Date(date)
+    //                   )
+    //                 : status === "public"
+    //                 ? serverTimestamp()
+    //                 : null,
+    //         },
+    //     };
 
-        // console.log(serverTimestamp);
+    //     addDoc(colRef, doc)
+    //         .then((res) => {
+    //             console.log("success saving doc");
+    //             navigate("/");
+    //         })
+    //         .catch((err) => {
+    //             console.error(err);
+    //         });
 
-        const doc = {
-            title,
-            description,
-            status,
-            buttons: buttons.map((btn) => {
-                delete btn.id;
-                return btn;
-            }),
+    //     // console.log(doc, colRef);
+    // };
 
-            slug: slugify(title),
-            meta: {
-                createdAt: serverTimestamp(),
-                publishedAt: date
-                    ? Timestamp.fromDate(
-                          new Date(date)
-                      )
-                    : status === "public"
-                    ? serverTimestamp()
-                    : null,
-            },
-        };
-
-        addDoc(colRef, doc)
-            .then((res) => {
-                console.log("success saving doc");
-                navigate("/");
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-
-        // console.log(doc, colRef);
-    };
-
-    return (
-        <form
-            className='storyStyle create'
-            onSubmit={(e) => e.preventDefault()}
-        >
-            <input
-                placeholder='Title'
-                autoComplete='off'
-                type='text'
-                name='title'
-                id='title'
-            />
-            <input
-                placeholder='Publish date'
-                autoComplete='off'
-                type='date'
-                id='date'
-                name='date'
-            />
-            <textarea
-                className='summernote'
-                placeholder='Description'
-                id='summernote'
-                name='description'
-            ></textarea>
-            <div>
-                <header>Add Links</header>
-                <div className='links'>
-                    <div className='addLinkContainer'>
-                        <input
-                            type='text'
-                            name='text'
-                            id='text'
-                            placeholder='Label'
-                        />
-                        <input
-                            type='text'
-                            name='link'
-                            id='link'
-                            placeholder='Link to story'
-                            autoComplete='off'
-                            onClick={(e) => {
-                                e.target.value =
-                                    "https://www.";
-                            }}
-                        />
-                    </div>
-                    <button
-                        className='add'
-                        onClick={(e) => {
-                            const text =
-                                document.querySelector(
-                                    "input#text"
-                                ).value;
-                            const link =
-                                document.querySelector(
-                                    "input#link"
-                                ).value;
-
-                            if (
-                                isValidUrl(
-                                    link
-                                ) &&
-                                text
-                            ) {
-                                setTitleAndDescription();
-                                setButtons([
-                                    ...buttons,
-                                    {
-                                        text,
-                                        link,
-                                        id: genId.next()
-                                            .value,
-                                    },
-                                ]);
-                                document.querySelector(
-                                    "input#text"
-                                ).value = "";
-                                document.querySelector(
-                                    "input#link"
-                                ).value =
-                                    "https://www.";
-                            } else {
-                                console.error(
-                                    "That is not a real link to anything"
-                                );
-                            }
-                            // }
-                        }}
-                    >
-                        <div>+</div>
-                    </button>
-                    <div className='newButtons'>
-                        {buttons.map((e, i) => (
-                            <div
-                                className='btnContainer'
-                                key={e.id}
-                                data-id={e.id}
-                            >
-                                <CgClose
-                                    className='delBtn'
-                                    onClick={() =>
-                                        handleDelBtn(
-                                            e.id
-                                        )
-                                    }
-                                />
-                                <button>
-                                    <a
-                                        href={
-                                            e.link
-                                        }
-                                        target='_blank'
-                                        rel='noreferrer'
-                                    >
-                                        {e.text}
-                                    </a>
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <button
-                onClick={() =>
-                    handleSave("public")
-                }
-                // const { title, description } =
-                //     setTitleAndDescription();
-
-                // if (
-                //     title &&
-                //     description &&
-                //     buttons.length
-                // ) {
-                //     // dispatch(
-                //     console.log(
-                //         title,
-                //         description,
-                //         buttons
-                //     );
-                //     setNewStoryAndStatus(
-                //         {
-                //             title,
-                //             description,
-                //             meta: {
-                //                 datePublished:
-                //                     new Date()
-                //                         .toDateString()
-                //                         .slice(
-                //                             4
-                //                         ),
-                //                 status: "public",
-                //                 buttons,
-                //                 slug: slugify(
-                //                     title
-                //                 ),
-                //             },
-                //         }
-                //     )
-                // );
-                // navigate("/");
-                // } else {
-                // dispatch(
-                //     setVerboseLog({
-                //         title: "must have title, description, and at least one button to publish",
-                //     })
-                // );
-                // }
-                // }
-            >
-                Publish
-            </button>
-            <button
-                onClick={() => {
-                    handleSave("draft");
-                    // const {
-                    //     title,
-                    //     description,
-                    // } =
-                    // setTitleAndDescription();
-
-                    // if (title) {
-                    // dispatch(
-                    //     setNewStoryAndStatus({
-                    //         title,
-                    //         description,
-                    //         meta: {
-                    //             datePublished:
-                    //                 null,
-                    //             status: "draft",
-                    //             buttons,
-                    //             slug: slugify(
-                    //                 title
-                    //             ),
-                    //         },
-                    //     })
-                    // );
-                    // navigate("/");
-                    // } else {
-                    // dispatch(
-                    //     setVerboseLog({
-                    //         title: "must have title to save as draft",
-                    //     })
-                    // );
-                    // }
-                }}
-            >
-                Save as Draft
-            </button>
-        </form>
-    );
+    return <FormTemplate />;
 }
 // const CreateStyled = styled.div``;
