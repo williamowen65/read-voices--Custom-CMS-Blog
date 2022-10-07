@@ -14,13 +14,12 @@ import { CgClose } from "react-icons/cg";
 import {
     serverTimestamp,
     addDoc,
+    Timestamp,
 } from "firebase/firestore";
 import { colRef } from "../../firebase-setup";
 
 function* genIdFn() {
-    let count = 0;
     while (true) {
-        count++;
         yield Math.random() * 100 * 5000;
     }
 }
@@ -45,15 +44,13 @@ export default function Create() {
         (state) => state.app
     );
     const navigate = useNavigate();
-    const [isOffline, setIsOffline] =
-        useState(false);
-    const [title, setTitle] = useState();
-    const [description, setDescription] =
-        useState();
+    // const [isOffline, setIsOffline] =
+    //     useState(false);
+    // const [title, setTitle] = useState();
+    // const [description, setDescription] =
+    //     useState();
 
     const [buttons, setButtons] = useState([]);
-    const [submitted, setSubmitted] =
-        useState(false);
 
     if (!loggedIn) {
         return <PageNotFound />;
@@ -68,8 +65,7 @@ export default function Create() {
             document.querySelector(
                 `#title`
             ).value;
-        setDescription(description);
-        setTitle(title);
+
         return {
             description,
             title,
@@ -91,6 +87,38 @@ export default function Create() {
         const date = form.date.value;
         const description =
             form.description.value;
+
+        if (status === "draft") {
+            if (!title) {
+                alert(
+                    "Must provide a title to save a draft"
+                );
+                return;
+            }
+        }
+        if (status === "public") {
+            if (
+                !title ||
+                !description ||
+                !buttons.length
+            ) {
+                alert(
+                    "Must provide a title, description, and at least one button to make publish"
+                );
+                return;
+            }
+            if (!date) {
+                // eslint-disable-next-line no-restricted-globals
+                const res = confirm(
+                    "You provided no publish date. Do you want to just use today as the date? You can change it later."
+                );
+                if (!res) {
+                    return;
+                }
+            }
+        }
+
+        // console.log(serverTimestamp);
 
         const doc = {
             title,
@@ -116,12 +144,13 @@ export default function Create() {
         addDoc(colRef, doc)
             .then((res) => {
                 console.log("success");
+                navigate("/");
             })
             .catch((err) => {
                 console.error(err);
             });
 
-        console.log(doc, colRef);
+        // console.log(doc, colRef);
     };
 
     return (
