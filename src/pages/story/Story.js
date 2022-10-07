@@ -20,6 +20,8 @@ import {
 import LoadingSpinner from "../../components/UX/Spinner";
 import {
     doc,
+    serverTimestamp,
+    Timestamp,
     updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase-setup";
@@ -87,9 +89,29 @@ export default function Story() {
             }
         }
 
-        updateDoc(docRef, {
+        let docc = {
             status: status,
-        })
+            meta: {
+                createdAt: Timestamp.fromDate(
+                    new Date(story.meta.createdAt)
+                ),
+                publishedAt: story.meta
+                    .publishedAt
+                    ? Timestamp.fromDate(
+                          new Date(
+                              story.meta.publishedAt
+                          )
+                      )
+                    : null,
+            },
+        };
+
+        if (!story.meta.publishedAt) {
+            docc["meta"].publishedAt =
+                serverTimestamp();
+        }
+
+        updateDoc(docRef, docc)
             .then(() => {
                 console.log("sucess");
             })
