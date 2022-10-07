@@ -1,0 +1,37 @@
+[debug] [2022-10-07T17:27:36.599Z] ----------------------------------------------------------------------
+[debug] [2022-10-07T17:27:36.600Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2022-10-07T17:27:36.601Z] CLI Version:   11.14.1
+[debug] [2022-10-07T17:27:36.601Z] Platform:      win32
+[debug] [2022-10-07T17:27:36.601Z] Node Version:  v16.17.1
+[debug] [2022-10-07T17:27:36.604Z] Time:          Fri Oct 07 2022 10:27:36 GMT-0700 (Pacific Daylight Time)
+[debug] [2022-10-07T17:27:36.605Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-10-07T17:27:36.677Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-10-07T17:27:36.678Z] > authorizing via signed-in user (william.owen.dev@gmail.com)
+[debug] [2022-10-07T17:27:36.678Z] [iam] checking project read-voices-2 for permissions ["firebase.projects.get"]
+[debug] [2022-10-07T17:27:36.679Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/read-voices-2:testIamPermissions [none]
+[debug] [2022-10-07T17:27:36.679Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/read-voices-2:testIamPermissions x-goog-quota-user=projects/read-voices-2
+[debug] [2022-10-07T17:27:36.680Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/read-voices-2:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-10-07T17:27:36.861Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/read-voices-2:testIamPermissions 200
+[debug] [2022-10-07T17:27:36.861Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/read-voices-2:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-10-07T17:27:36.863Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2 [none]
+[debug] [2022-10-07T17:27:37.225Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2 200
+[debug] [2022-10-07T17:27:37.226Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2 {"projectId":"read-voices-2","projectNumber":"340433485596","displayName":"read-voices-2","name":"projects/read-voices-2","resources":{"hostingSite":"read-voices-2","storageBucket":"read-voices-2.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_08bbe4fc-0455-41a3-a71e-6cf232557f7f"}
+[info] 
+[info] === Serving from 'C:\Users\willi\OneDrive\Desktop\Freelance\active\Nathan\read_voices_cra'...
+[info] 
+[debug] [2022-10-07T17:27:37.236Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/read-voices-2/sites 
+[info] +  functions: Using node@16 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@16 from host."}}
+[debug] [2022-10-07T17:27:37.335Z] defaultcredentials: writing to file C:\Users\willi\AppData\Roaming\firebase\william_owen.dev_gmail.com_application_default_credentials.json
+[debug] [2022-10-07T17:27:37.338Z] Setting GAC to C:\Users\willi\AppData\Roaming\firebase\william_owen.dev_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\willi\\AppData\\Roaming\\firebase\\william_owen.dev_gmail.com_application_default_credentials.json"}}
+[debug] [2022-10-07T17:27:37.339Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2/adminSdkConfig [none]
+[debug] [2022-10-07T17:27:37.915Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2/adminSdkConfig 200
+[debug] [2022-10-07T17:27:37.916Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2/adminSdkConfig {"projectId":"read-voices-2","storageBucket":"read-voices-2.appspot.com","locationId":"us-central"}
+[debug] [2022-10-07T17:27:37.935Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/read-voices-2/sites 200
+[debug] [2022-10-07T17:27:37.935Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/read-voices-2/sites {"sites":[{"name":"projects/read-voices-2/sites/read-voices-2","defaultUrl":"https://read-voices-2.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-10-07T17:27:37.936Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2/webApps/-/config [none]
+[debug] [2022-10-07T17:27:38.344Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2/webApps/-/config 200
+[debug] [2022-10-07T17:27:38.344Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/read-voices-2/webApps/-/config {"projectId":"read-voices-2","appId":"1:340433485596:web:cb731b735ab3fe82a0c4d9","storageBucket":"read-voices-2.appspot.com","locationId":"us-central","apiKey":"AIzaSyCU8qYxyRnUQR6C7jqSw9lHA_tP0ZEAb3Y","authDomain":"read-voices-2.firebaseapp.com","messagingSenderId":"340433485596","measurementId":"G-0J1H6G0VV8"}
+[info] i  functions: Watching "C:\Users\willi\OneDrive\Desktop\Freelance\active\Nathan\read_voices_cra\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\willi\\OneDrive\\Desktop\\Freelance\\active\\Nathan\\read_voices_cra\\functions\" for Cloud Functions..."}}
+[info] i  hosting: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
+[info] +  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}

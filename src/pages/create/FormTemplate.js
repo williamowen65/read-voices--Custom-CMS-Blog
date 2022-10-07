@@ -165,14 +165,14 @@ export function FormTemplate({ handleSave }) {
 
             <button
                 onClick={() =>
-                    handleSave("public")
+                    handleSave("public", buttons)
                 }
             >
                 Publish
             </button>
             <button
                 onClick={() => {
-                    handleSave("draft");
+                    handleSave("draft", buttons);
                 }}
             >
                 Save as Draft

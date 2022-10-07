@@ -23,6 +23,7 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase-setup";
+import { FormTemplate } from "../create/FormTemplate";
 const DeleteStoryPrompt = React.lazy(() =>
     import(
         "../../components/modals/DeleteStoryPrompt"
@@ -129,9 +130,11 @@ export default function Story() {
                                 </button>
                             ) : (
                                 <>
-                                    <button>
-                                        Re-Publish
-                                    </button>
+                                    {isEditing && (
+                                        <button>
+                                            Re-Publish
+                                        </button>
+                                    )}
                                     <button
                                         onClick={() =>
                                             handleUpdate(
@@ -157,7 +160,13 @@ export default function Story() {
                 )}
 
                 <ul>
-                    <StoryItem story={story} />
+                    {isEditing ? (
+                        <FormTemplate />
+                    ) : (
+                        <StoryItem
+                            story={story}
+                        />
+                    )}
                 </ul>
             </StoryStyled>
         );
