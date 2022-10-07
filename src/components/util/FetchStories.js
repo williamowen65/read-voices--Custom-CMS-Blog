@@ -14,6 +14,7 @@ export default function FetchStories() {
         onSnapshot(orderedCol, (snapshot) => {
             let stories = [];
             snapshot.docs.forEach((story) => {
+                console.log(story.data());
                 stories.push({
                     ...story.data(),
                     meta: {

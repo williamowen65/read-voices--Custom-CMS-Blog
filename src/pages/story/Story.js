@@ -13,6 +13,7 @@ import PageNotFound from "../404/PageNotFound";
 import "./story.scss";
 import StoryItem from "./StoryItem";
 import { setIsEditing } from "../../redux/appReducer";
+import LoadingSpinner from "../../components/UX/Spinner";
 
 export default function Story() {
     const dispatch = useDispatch();
@@ -26,6 +27,10 @@ export default function Story() {
     const story = stories.filter(
         (story) => story.meta.slug === slug
     )[0];
+
+    if (stories.length === 0) {
+        return <LoadingSpinner />;
+    }
 
     const handleEditMode = () => {
         dispatch(setIsEditing(!isEditing));
