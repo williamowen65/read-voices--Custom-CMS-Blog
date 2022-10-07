@@ -13,8 +13,16 @@ import styled from "styled-components";
 import PageNotFound from "../404/PageNotFound";
 import "./story.scss";
 import StoryItem from "./StoryItem";
-import { setIsEditing } from "../../redux/appReducer";
+import {
+    setActiveSlug,
+    setIsEditing,
+} from "../../redux/appReducer";
 import LoadingSpinner from "../../components/UX/Spinner";
+import {
+    doc,
+    updateDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase-setup";
 const DeleteStoryPrompt = React.lazy(() =>
     import(
         "../../components/modals/DeleteStoryPrompt"
@@ -31,8 +39,11 @@ export default function Story() {
         (state) => state.app
     );
     const story = stories.filter(
-        (story) => story.meta.slug === slug
+        (story) => story.slug === slug
     )[0];
+    useEffect(() => {
+        dispatch(setActiveSlug(slug));
+    }, [slug]);
     const [showDelPrompt, setShowDelPrompt] =
         useState(false);
     const handleDelPrompt = () => {
@@ -44,6 +55,23 @@ export default function Story() {
     const handleEditMode = () => {
         dispatch(setIsEditing(!isEditing));
     };
+    const handleUpdate = (status) => {
+        // console.log(story, story.meta.id);
+        const docRef = doc(
+            db,
+            "stories",
+            story.id
+        );
+        updateDoc(docRef, {
+            status: status,
+        })
+            .then(() => {
+                console.log("sucess");
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
 
     if (stories.length === 0) {
         return <LoadingSpinner />;
@@ -51,7 +79,7 @@ export default function Story() {
 
     if (story) {
         if (
-            story.meta.status === "draft" &&
+            story.status === "draft" &&
             !loggedIn
         ) {
             return <PageNotFound />;
@@ -88,15 +116,33 @@ export default function Story() {
                                     Edit
                                 </button>
                             )}
-                            {story.meta.status ===
+                            {story.status ===
                             "draft" ? (
-                                <button>
+                                <button
+                                    onClick={() =>
+                                        handleUpdate(
+                                            "public"
+                                        )
+                                    }
+                                >
                                     Publish
                                 </button>
                             ) : (
-                                <button>
-                                    Re-Publish
-                                </button>
+                                <>
+                                    <button>
+                                        Re-Publish
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            handleUpdate(
+                                                "draft"
+                                            )
+                                        }
+                                    >
+                                        Revert to
+                                        Draft
+                                    </button>
+                                </>
                             )}
                         </div>
                         <button

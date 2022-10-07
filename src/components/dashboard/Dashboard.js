@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import "./dashboard.scss";
 import { BsFilter } from "react-icons/bs";
@@ -20,7 +20,15 @@ export default function Dashboard() {
     );
 
     const navigate = useNavigate();
-    const { slug } = useParams();
+    const { activeSlug } = useSelector(
+        (state) => state.app
+    );
+
+    // // const { slug } = useParams();
+    useEffect(() => {
+        console.log(activeSlug);
+    }, []);
+
     return (
         <DashboardStyled id='dashboard'>
             <header>
@@ -42,11 +50,11 @@ export default function Dashboard() {
                     <LiStyled
                         key={el.id}
                         data-id={el.id}
-                        data-slug={el.meta.slug}
-                        status={el.meta.status}
+                        data-slug={el.slug}
+                        status={el.status}
                         onClick={() => {
                             navigate(
-                                `/story/${el.meta.slug}`
+                                `/story/${el.slug}`
                             );
                             dispatch(
                                 setIsEditing(
@@ -54,12 +62,11 @@ export default function Dashboard() {
                                 )
                             );
                         }}
-                        // className={
-                        //     activeSlug ===
-                        //     el.meta.slug
-                        //         ? "active"
-                        //         : null
-                        // }
+                        className={
+                            activeSlug === el.slug
+                                ? "active"
+                                : null
+                        }
                     >
                         <h4 className='title'>
                             {el.title}
@@ -75,9 +82,7 @@ export default function Dashboard() {
                             // )
                             // }
                         >
-                            <p>
-                                {el.meta.status}
-                            </p>
+                            <p>{el.status}</p>
                             {/* <Dot story={el} /> */}
                         </div>
                     </LiStyled>

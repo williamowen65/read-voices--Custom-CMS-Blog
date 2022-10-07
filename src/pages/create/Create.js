@@ -123,6 +123,13 @@ export default function Create() {
         const doc = {
             title,
             description,
+            status,
+            buttons: buttons.map((btn) => {
+                delete btn.id;
+                return btn;
+            }),
+
+            slug: slugify(title),
             meta: {
                 createdAt: serverTimestamp(),
                 publishedAt: date
@@ -132,12 +139,6 @@ export default function Create() {
                     : status === "public"
                     ? serverTimestamp()
                     : null,
-                buttons: buttons.map((btn) => {
-                    delete btn.id;
-                    return btn;
-                }),
-                status,
-                slug: slugify(title),
             },
         };
 

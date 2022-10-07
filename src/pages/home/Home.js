@@ -24,7 +24,7 @@ export default function Home() {
                 {stories
                     .filter(
                         (story) =>
-                            story.meta.status ===
+                            story.status ===
                             "public"
                     )
                     .map((story) => (

@@ -5,17 +5,27 @@ import React, {
 import styled from "styled-components";
 import BasicModal from "./BasicModal";
 import "./modalStyles.scss";
+import {
+    doc,
+    deleteDoc,
+    serverTimestamp,
+    updateDoc,
+    getDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase-setup";
+import { useNavigate } from "react-router-dom";
 
 export default function DeleteStoryPrompt({
     story,
     cancel,
 }) {
+    const nav = useNavigate();
     const [userInput, setUserInput] =
         useState("");
     const [matches, setMatches] = useState(false);
 
     useEffect(() => {
-        if (userInput === story.meta.slug) {
+        if (userInput === story.slug) {
             setMatches(true);
         } else {
             setMatches(false);
@@ -31,6 +41,17 @@ export default function DeleteStoryPrompt({
             btn.setAttribute("disabled", "true");
         }
     }, [matches]);
+
+    const handleDelete = () => {
+        const docRef = doc(
+            db,
+            "stories",
+            story.id
+        );
+        deleteDoc(docRef).then(() => {
+            nav("/");
+        });
+    };
 
     return (
         <BasicModal>
@@ -61,7 +82,10 @@ export default function DeleteStoryPrompt({
                     >
                         Cancel
                     </button>
-                    <button className='confirm'>
+                    <button
+                        className='confirm'
+                        onClick={handleDelete}
+                    >
                         Confirm Delete
                     </button>
                 </div>

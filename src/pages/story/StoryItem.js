@@ -21,7 +21,7 @@ export default function StoryItem({ story }) {
                             window.location
                                 .origin +
                                 "/story/" +
-                                story.meta.slug
+                                story.slug
                         );
                         shareBtn.current.classList.toggle(
                             "active"
@@ -48,21 +48,19 @@ export default function StoryItem({ story }) {
                 {/* </span> */}
             </div>
             <div className='buttons'>
-                {story.meta?.buttons?.length ? (
-                    story.meta.buttons.map(
-                        (el, i) => (
-                            <a
-                                target='_blank'
-                                rel='noreferrer'
-                                href={el.link}
-                                key={i}
-                            >
-                                <button>
-                                    {el.text}
-                                </button>
-                            </a>
-                        )
-                    )
+                {story.buttons?.length ? (
+                    story.buttons.map((el, i) => (
+                        <a
+                            target='_blank'
+                            rel='noreferrer'
+                            href={el.link}
+                            key={i}
+                        >
+                            <button>
+                                {el.text}
+                            </button>
+                        </a>
+                    ))
                 ) : (
                     <button>
                         No Links shared
