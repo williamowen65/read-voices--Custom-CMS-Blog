@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, {
+    useEffect,
+    useState,
+} from "react";
 import { CgClose } from "react-icons/cg";
+import { useLocation } from "react-router-dom";
 const isValidUrl = (urlString) => {
     try {
         return Boolean(new URL(urlString));
@@ -14,8 +18,26 @@ function* genIdFn() {
 }
 const genId = genIdFn();
 
-export function FormTemplate({ handleSave }) {
+export function FormTemplate({
+    handleSave,
+    story,
+}) {
     const [buttons, setButtons] = useState([]);
+    // console.log("editing: ", story);
+    const location = useLocation();
+
+    useEffect(() => {
+        if (story) {
+            document.querySelector(
+                `#summernote`
+            ).value = story.description;
+
+            document.querySelector(
+                `#title`
+            ).value = story.title;
+            setButtons(story.buttons);
+        }
+    }, []);
 
     const setTitleAndDescription = () => {
         const description =
@@ -163,20 +185,32 @@ export function FormTemplate({ handleSave }) {
                 </div>
             </div>
 
-            <button
-                onClick={() =>
-                    handleSave("public", buttons)
-                }
-            >
-                Publish
-            </button>
-            <button
-                onClick={() => {
-                    handleSave("draft", buttons);
-                }}
-            >
-                Save as Draft
-            </button>
+            {!location.pathname.includes(
+                "/story/"
+            ) && (
+                <>
+                    <button
+                        onClick={() =>
+                            handleSave(
+                                "public",
+                                buttons
+                            )
+                        }
+                    >
+                        Publish
+                    </button>
+                    <button
+                        onClick={() => {
+                            handleSave(
+                                "draft",
+                                buttons
+                            );
+                        }}
+                    >
+                        Save as Draft
+                    </button>
+                </>
+            )}
         </form>
     );
 }

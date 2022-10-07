@@ -5,9 +5,10 @@ header.mainHeader {
 
 #header {
     text-align: center;
+    // position: absolute;
     // color: blue;
     div {
-        display: flex;
+        display: inline-flex;
         flex-direction: column;
         align-items: center;
     }
@@ -24,5 +25,12 @@ header.mainHeader {
         right: 10px;
         cursor: pointer;
         top: 10px;
+    }
+    .filter {
+        position: absolute;
+        top: 50px;
+        cursor: pointer;
+        right: 30px;
+        // translate: 100px 0;
     }
 }

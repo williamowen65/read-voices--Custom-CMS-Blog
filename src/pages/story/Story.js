@@ -119,15 +119,29 @@ export default function Story() {
                             )}
                             {story.status ===
                             "draft" ? (
-                                <button
-                                    onClick={() =>
-                                        handleUpdate(
-                                            "public"
-                                        )
-                                    }
-                                >
-                                    Publish
-                                </button>
+                                <>
+                                    <button
+                                        onClick={() =>
+                                            handleUpdate(
+                                                "public"
+                                            )
+                                        }
+                                    >
+                                        Publish
+                                    </button>
+                                    {isEditing && (
+                                        <button
+                                            onClick={() =>
+                                                handleUpdate(
+                                                    "public"
+                                                )
+                                            }
+                                        >
+                                            Save
+                                            Draft
+                                        </button>
+                                    )}
+                                </>
                             ) : (
                                 <>
                                     {isEditing && (
@@ -149,7 +163,7 @@ export default function Story() {
                             )}
                         </div>
                         <button
-                            className='delBtn'
+                            className='delDocBtn'
                             onClick={
                                 handleDelPrompt
                             }
@@ -161,7 +175,9 @@ export default function Story() {
 
                 <ul>
                     {isEditing ? (
-                        <FormTemplate />
+                        <FormTemplate
+                            story={story}
+                        />
                     ) : (
                         <StoryItem
                             story={story}

@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import LoadingSpinner from "../../components/UX/Spinner";
 import "./styles/home.scss";
+import { BsFilter } from "react-icons/bs";
+
 import {
     BiShare,
     BiShareAlt,
@@ -19,7 +21,7 @@ export default function Home() {
     }
 
     return (
-        <HomeStyled>
+        <HomeStyled className='home'>
             <ul>
                 {stories
                     .filter(

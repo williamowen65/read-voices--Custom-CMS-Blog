@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import "./dashboard.scss";
-import { BsFilter } from "react-icons/bs";
 import { TbPlus } from "react-icons/tb";
 import {
     useDispatch,
@@ -33,10 +32,7 @@ export default function Dashboard() {
         <DashboardStyled id='dashboard'>
             <header>
                 <h3>Dashboard</h3>
-                <BsFilter
-                    size={30}
-                    className='filter'
-                />
+
                 <TbPlus
                     size={30}
                     className='add'
