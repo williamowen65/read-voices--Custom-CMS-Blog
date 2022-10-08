@@ -23,7 +23,8 @@ ul {
                 &.active {
                     display: block;
                     .copyNote {
-                        display: inline;
+                        display: inline-block;
+                        translate: 0px -8px;
                     }
                     // display: none;
                 }
@@ -39,7 +40,8 @@ ul {
                     }
                     &.active {
                         .copyNote {
-                            display: inline;
+                            translate: 0px -8px;
+                            display: inline-block;
                         }
                     }
                 }
