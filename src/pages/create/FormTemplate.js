@@ -82,6 +82,24 @@ export function FormTemplate({
     };
 
     const handleDelBtn = (text, link) => {
+        if (story) {
+            // alert("hi");
+            dispatch(
+                setButtonsForStory({
+                    slug: story.slug,
+                    buttons: buttons.filter(
+                        (el) => {
+                            return (
+                                el.text !==
+                                    text &&
+                                el.link !== link
+                            );
+                        }
+                    ),
+                })
+            );
+        }
+        console.log(story);
         setButtons(
             buttons.filter((el) => {
                 return (
@@ -110,7 +128,7 @@ export function FormTemplate({
                     setButtonsForStory({
                         slug: story.slug,
                         buttons: [
-                            ...story.buttons,
+                            ...buttons,
                             {
                                 text,
                                 link,

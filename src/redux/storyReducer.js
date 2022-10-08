@@ -10,6 +10,10 @@ const storySlice = createSlice({
             state.stories = action.payload;
         },
         setButtonsForStory: (state, action) => {
+            console.log(
+                "reducer ",
+                action.payload
+            );
             state.stories.map((story) => {
                 if (
                     story.slug ===
