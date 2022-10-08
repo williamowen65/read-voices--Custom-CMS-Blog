@@ -19,12 +19,7 @@ import {
 import { colRef } from "../../firebase-setup";
 import { FormTemplate } from "./FormTemplate";
 
-const slugify = (str) => {
-    if (str.indexOf(" ") === -1) {
-        return str.toLowerCase();
-    }
-    return str.replaceAll(" ", "-").toLowerCase();
-};
+import { slugify } from "../../utilFns/slugify";
 
 export default function Create() {
     const dispatch = useDispatch();

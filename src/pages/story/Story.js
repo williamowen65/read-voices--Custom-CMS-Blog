@@ -8,7 +8,10 @@ import {
     useDispatch,
     useSelector,
 } from "react-redux";
-import { useParams } from "react-router-dom";
+import {
+    useNavigate,
+    useParams,
+} from "react-router-dom";
 import styled from "styled-components";
 import PageNotFound from "../404/PageNotFound";
 import "./story.scss";
@@ -26,6 +29,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase-setup";
 import { FormTemplate } from "../create/FormTemplate";
+import { slugify } from "../../utilFns/slugify";
 const DeleteStoryPrompt = React.lazy(() =>
     import(
         "../../components/modals/DeleteStoryPrompt"
@@ -33,6 +37,7 @@ const DeleteStoryPrompt = React.lazy(() =>
 );
 
 export default function Story() {
+    const nav = useNavigate();
     const dispatch = useDispatch();
     const { slug } = useParams();
     const { stories } = useSelector(
@@ -59,18 +64,25 @@ export default function Story() {
         dispatch(setIsEditing(!isEditing));
     };
     const handleUpdate = (status) => {
-        // console.log(story, story.meta.id);
         const docRef = doc(
             db,
             "stories",
             story.id
         );
+        const title =
+            document.querySelector("#title")
+                ?.value || story.title;
+        const description =
+            document.querySelector("#summernote")
+                ?.value || story.description;
+        const date =
+            document.querySelector("#date").value;
 
-        console.log("STATEUS: ", status);
+        // console.log("STATEUS: ", status);
         if (status === "public") {
             if (
-                !story.title ||
-                !story.description ||
+                !title ||
+                !description ||
                 !story.buttons.length
             ) {
                 alert(
@@ -78,7 +90,7 @@ export default function Story() {
                 );
                 return;
             }
-            if (!story.meta.publishedAt) {
+            if (!date) {
                 // eslint-disable-next-line no-restricted-globals
                 const res = confirm(
                     "You provided no publish date. Do you want to just use today as the date? You can change it later."
@@ -91,29 +103,37 @@ export default function Story() {
 
         let docc = {
             status: status,
+            title,
+            description,
+            slug: slugify(title),
+            buttons: story.buttons,
             meta: {
                 createdAt: Timestamp.fromDate(
                     new Date(story.meta.createdAt)
                 ),
-                publishedAt: story.meta
-                    .publishedAt
+                publishedAt: date
                     ? Timestamp.fromDate(
-                          new Date(
-                              story.meta.publishedAt
-                          )
+                          new Date(date)
                       )
                     : null,
             },
         };
 
-        if (!story.meta.publishedAt) {
+        if (
+            status === "public" &&
+            !docc.meta.publishedAt
+        ) {
             docc["meta"].publishedAt =
                 serverTimestamp();
         }
 
+        console.log(docc);
+
         updateDoc(docRef, docc)
             .then(() => {
-                console.log("sucess");
+                console.log("success");
+                nav(`/story/${docc.slug}`);
+                dispatch(setIsEditing(false));
             })
             .catch((err) => {
                 console.error(err);
@@ -179,7 +199,7 @@ export default function Story() {
                                         <button
                                             onClick={() =>
                                                 handleUpdate(
-                                                    "public"
+                                                    "draft"
                                                 )
                                             }
                                         >
@@ -191,8 +211,14 @@ export default function Story() {
                             ) : (
                                 <>
                                     {isEditing && (
-                                        <button>
-                                            Re-Publish
+                                        <button
+                                            onClick={() => {
+                                                handleUpdate(
+                                                    "public"
+                                                );
+                                            }}
+                                        >
+                                            Save
                                         </button>
                                     )}
                                     <button

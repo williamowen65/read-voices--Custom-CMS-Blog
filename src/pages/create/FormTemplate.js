@@ -5,7 +5,11 @@ import React, {
 import { CgClose } from "react-icons/cg";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { setButtonsForStory } from "../../redux/storyReducer";
+import {
+    setButtonsForStory,
+    setTitleAndDescriptionForStory,
+} from "../../redux/storyReducer";
+import { slugify } from "../../utilFns/slugify";
 const isValidUrl = (urlString) => {
     try {
         return Boolean(new URL(urlString));
@@ -57,6 +61,19 @@ export function FormTemplate({
             document.querySelector(
                 `#title`
             ).value;
+
+        if (story) {
+            dispatch(
+                setTitleAndDescriptionForStory(
+                    story.slug,
+                    {
+                        title,
+                        description,
+                        slug: slugify(title),
+                    }
+                )
+            );
+        }
 
         return {
             description,
@@ -161,7 +178,7 @@ export function FormTemplate({
                             id='link'
                             placeholder='Link to story'
                             autoComplete='off'
-                            onClick={(e) => {
+                            onFocus={(e) => {
                                 e.target.value =
                                     "https://www.";
                             }}
@@ -177,7 +194,12 @@ export function FormTemplate({
                         {buttons.map((e, i) => (
                             <div
                                 className='btnContainer'
-                                key={e.id}
+                                key={
+                                    i +
+                                    Math.random() *
+                                        Math.random() *
+                                        30
+                                }
                                 data-id={e.id}
                             >
                                 <CgClose

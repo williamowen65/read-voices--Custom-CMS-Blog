@@ -10,19 +10,6 @@ const storySlice = createSlice({
             state.stories = action.payload;
         },
         setButtonsForStory: (state, action) => {
-            // const story = state.stories.filter(
-            //     (story) => {
-            //         return (
-            //             story.slug ===
-            //             action.payload.slug
-            //         );
-            //     }
-            // )[0];
-            // console.log(action.payload, story);
-            // story.buttons.push(
-            //     action.payload.buttons
-            // );
-
             state.stories.map((story) => {
                 if (
                     story.slug ===
@@ -34,11 +21,31 @@ const storySlice = createSlice({
                 return story;
             });
         },
+        setTitleAndDescriptionForStory: (
+            state,
+            action
+        ) => {
+            state.stories.map((story) => {
+                if (
+                    story.slug ===
+                    action.payload.slug
+                ) {
+                    story.title =
+                        action.payload.title;
+                    story.description =
+                        action.payload.description;
+                }
+                return story;
+            });
+        },
     },
 });
 
 export const setStories =
     storySlice.actions.setStories;
+export const setTitleAndDescriptionForStory =
+    storySlice.actions
+        .setTitleAndDescriptionForStory;
 export const setButtonsForStory =
     storySlice.actions.setButtonsForStory;
 export default storySlice.reducer;
