@@ -81,9 +81,14 @@ export function FormTemplate({
         };
     };
 
-    const handleDelBtn = (id) => {
+    const handleDelBtn = (text, link) => {
         setButtons(
-            buttons.filter((el) => el.id !== id)
+            buttons.filter((el) => {
+                return (
+                    el.text !== text &&
+                    el.link !== link
+                );
+            })
         );
     };
 
@@ -191,38 +196,43 @@ export function FormTemplate({
                         <div>+</div>
                     </button>
                     <div className='newButtons'>
-                        {buttons.map((e, i) => (
-                            <div
-                                className='btnContainer'
-                                key={
-                                    i +
+                        {buttons.map((e, i) => {
+                            let key =
+                                i +
+                                Math.random() *
                                     Math.random() *
-                                        Math.random() *
-                                        30
-                                }
-                                data-id={e.id}
-                            >
-                                <CgClose
-                                    className='delBtn'
-                                    onClick={() =>
-                                        handleDelBtn(
-                                            e.id
-                                        )
-                                    }
-                                />
-                                <button>
-                                    <a
-                                        href={
-                                            e.link
+                                    30;
+                            return (
+                                <div
+                                    className='btnContainer'
+                                    key={key}
+                                    data-id={e.id}
+                                >
+                                    <CgClose
+                                        className='delBtn'
+                                        onClick={() =>
+                                            handleDelBtn(
+                                                e.text,
+                                                e.link
+                                            )
                                         }
-                                        target='_blank'
-                                        rel='noreferrer'
-                                    >
-                                        {e.text}
-                                    </a>
-                                </button>
-                            </div>
-                        ))}
+                                    />
+                                    <button>
+                                        <a
+                                            href={
+                                                e.link
+                                            }
+                                            target='_blank'
+                                            rel='noreferrer'
+                                        >
+                                            {
+                                                e.text
+                                            }
+                                        </a>
+                                    </button>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>

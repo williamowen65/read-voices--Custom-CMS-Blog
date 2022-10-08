@@ -76,7 +76,8 @@ export default function Story() {
             document.querySelector("#summernote")
                 ?.value || story.description;
         const date =
-            document.querySelector("#date").value;
+            document.querySelector("#date")
+                ?.value || story.meta.publishedAt;
 
         // console.log("STATEUS: ", status);
         if (status === "public") {
