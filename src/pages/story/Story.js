@@ -75,20 +75,12 @@ export default function Story() {
         const description =
             document.querySelector("#summernote")
                 ?.value || story.description;
-        let date = story.meta.publishedAt;
+        let date = !isEditing
+            ? story.meta.publishedAt
+            : document.querySelector("#date")
+                  ?.value || "";
 
-        if (
-            document.querySelector("#date")
-                ?.value &&
-            document.querySelector("#date")
-                ?.value !== date
-        ) {
-            date =
-                document.querySelector("#date")
-                    ?.value ?? "";
-        }
-
-        console.log(date, date.length);
+        // console.log(date, date.length);
 
         // console.log("STATEUS: ", status);
         if (status === "public") {
