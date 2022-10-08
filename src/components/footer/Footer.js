@@ -26,6 +26,21 @@ export default function Footer() {
                     )}
                 </div>
             )}
+            {location.pathname.includes(
+                "about"
+            ) && (
+                <div className='promoContainer'>
+                    {" "}
+                    Looking for your own custom
+                    website? Contact{" "}
+                    <a
+                        href='mailto://william.owen.dev@gmail.com'
+                        className='promo'
+                    >
+                        William Owen
+                    </a>
+                </div>
+            )}
             <NavLink to='/about'>About</NavLink> |{" "}
             <NavLink to='/donate'>Donate</NavLink>
         </FooterStyled>

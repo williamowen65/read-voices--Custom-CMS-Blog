@@ -48,12 +48,12 @@ export default function Header() {
                     page
                 </p>
             </div>
-            {location.pathname === "/" && (
+            {/* {location.pathname === "/" && (
                 <BsFilter
                     size={30}
                     className='filter'
                 />
-            )}
+            )} */}
             <hr />
         </HeaderStyled>
     );

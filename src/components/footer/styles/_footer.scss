@@ -3,4 +3,21 @@ footer {
     margin-top: auto;
     text-align: center;
     justify-self: flex-end;
+    margin-bottom: 10px;
+    .promoContainer {
+        border: 1px solid black;
+        width: fit-content;
+        margin: 0 auto 30px;
+        padding: 7px 12px;
+    }
+    a {
+        &:not(.promo) {
+            padding-inline: 10px;
+            margin-inline: 10px;
+        }
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
