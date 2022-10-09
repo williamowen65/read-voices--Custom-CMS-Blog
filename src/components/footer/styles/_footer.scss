@@ -3,12 +3,36 @@ footer {
     margin-top: auto;
     text-align: center;
     justify-self: flex-end;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
+    // padding-top: 100px;
+    height: auto;
+    min-height: 100px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgb(228, 222, 222) 100%
+    );
+    // background-image: radial-gradient(
+    //     circle at bottom,
+    //     #ffa384,
+    //     transparent 100%
+    // );
+    // overflow: visible;
+    position: relative;
     .promoContainer {
         border: 1px solid black;
         width: fit-content;
         margin: 0 auto 30px;
         padding: 7px 12px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        translate: -50% 0;
     }
     a {
         &:not(.promo) {

@@ -6,6 +6,7 @@ import {
     useLocation,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ContentPadding } from "../SpecialContainers";
 
 export default function Footer() {
     const location = useLocation();
@@ -14,35 +15,44 @@ export default function Footer() {
     );
     return (
         <FooterStyled>
-            {!loggedIn && (
-                <div className='actionBtn'>
-                    {location.pathname.includes(
-                        "/story/"
-                    ) && (
-                        <NavLink to='/'>
-                            Looking for more
-                            stories???
-                        </NavLink>
-                    )}
+            <ContentPadding>
+                {!loggedIn && (
+                    <div className='actionBtn'>
+                        {location.pathname.includes(
+                            "/story/"
+                        ) && (
+                            <NavLink to='/'>
+                                Looking for more
+                                stories???
+                            </NavLink>
+                        )}
+                    </div>
+                )}
+                {location.pathname.includes(
+                    "about"
+                ) && (
+                    <div className='promoContainer'>
+                        {" "}
+                        Looking for your own
+                        custom website? Contact{" "}
+                        <a
+                            href='mailto://william.owen.dev@gmail.com'
+                            className='promo'
+                        >
+                            William Owen
+                        </a>
+                    </div>
+                )}
+                <div className='mainFooter'>
+                    <NavLink to='/about'>
+                        About
+                    </NavLink>{" "}
+                    |{" "}
+                    <NavLink to='/donate'>
+                        Donate
+                    </NavLink>
                 </div>
-            )}
-            {location.pathname.includes(
-                "about"
-            ) && (
-                <div className='promoContainer'>
-                    {" "}
-                    Looking for your own custom
-                    website? Contact{" "}
-                    <a
-                        href='mailto://william.owen.dev@gmail.com'
-                        className='promo'
-                    >
-                        William Owen
-                    </a>
-                </div>
-            )}
-            <NavLink to='/about'>About</NavLink> |{" "}
-            <NavLink to='/donate'>Donate</NavLink>
+            </ContentPadding>
         </FooterStyled>
     );
 }
