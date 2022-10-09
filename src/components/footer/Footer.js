@@ -32,15 +32,19 @@ export default function Footer() {
                     "about"
                 ) && (
                     <div className='promoContainer'>
-                        {" "}
-                        Looking for your own
-                        custom website? Contact{" "}
-                        <a
-                            href='mailto://william.owen.dev@gmail.com'
-                            className='promo'
-                        >
-                            William Owen
-                        </a>
+                        <p>
+                            Looking for your own
+                            custom website?
+                        </p>
+                        <p>
+                            Contact{" "}
+                            <a
+                                href='mailto://william.owen.dev@gmail.com'
+                                className='promo'
+                            >
+                                William Owen
+                            </a>
+                        </p>
                     </div>
                 )}
                 <div className='mainFooter'>
