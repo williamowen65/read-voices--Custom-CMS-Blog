@@ -46,7 +46,7 @@ export default function StoryItem({ story }) {
                         </p>
                     </header>
                     {/* <span> */}
-                    {story.description}
+                    <p>{story.description}</p>
                     {/* </span> */}
                 </div>
                 <div className='buttons'>

@@ -13,6 +13,7 @@
     .delDocBtn {
         position: fixed;
         bottom: 10px;
+        z-index: 3;
         right: 10px;
         background-color: rgb(223, 125, 125);
         border-style: dashed;
