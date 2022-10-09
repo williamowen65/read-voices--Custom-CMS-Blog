@@ -50,16 +50,16 @@ export default function StoryItem({ story }) {
             <div className='buttons'>
                 {story.buttons?.length ? (
                     story.buttons.map((el, i) => (
-                        <a
-                            target='_blank'
-                            rel='noreferrer'
-                            href={el.link}
-                            key={i}
-                        >
-                            <button>
+                        <button className='storyBtn'>
+                            <a
+                                target='_blank'
+                                rel='noreferrer'
+                                href={el.link}
+                                key={i}
+                            >
                                 {el.text}
-                            </button>
-                        </a>
+                            </a>
+                        </button>
                     ))
                 ) : (
                     <button>

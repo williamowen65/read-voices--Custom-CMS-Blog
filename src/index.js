@@ -1,4 +1,7 @@
-import React, { Suspense } from "react";
+import React, {
+    Suspense,
+    useEffect,
+} from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
@@ -16,6 +19,7 @@ import FetchStories from "./components/util/FetchStories";
 import AuthStateChange from "./components/util/AuthStateChange";
 import EditNavAlert from "./components/util/EditNavAlert";
 // import Dashboard from "./components/dashboard/Dashboard";
+import favicon from "./assets/favicon.ico";
 
 const Dashboard = React.lazy(() =>
     import("./components/dashboard/Dashboard.js")
@@ -28,6 +32,11 @@ const Appp = () => {
     const { loggedIn } = useSelector(
         (state) => state.app
     );
+    useEffect(() => {
+        document
+            .querySelector("head link[rel=icon]")
+            .setAttribute("href", favicon);
+    }, []);
     return (
         <div className='outerContainer'>
             <BrowserRouter>
