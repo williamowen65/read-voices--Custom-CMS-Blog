@@ -21,7 +21,10 @@ import {
     signOut,
 } from "firebase/auth";
 
-import { getAnalytics } from "firebase/analytics";
+import {
+    getAnalytics,
+    logEvent,
+} from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -38,6 +41,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+logEvent(analytics, "notification_received");
 // init services
 
 export const db = getFirestore();
