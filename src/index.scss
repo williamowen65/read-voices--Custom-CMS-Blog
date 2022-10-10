@@ -1,15 +1,12 @@
-@font-face {
-    font-family: "BellMT";
-    src: local("BellMT"),
-        url(./fonts/BellMT.ttf) format("truetype");
-}
+// @font-face {
+//     font-family: "BellMT";
+//     src: local("BellMT"),
+//         url(/fonts/BellMT.ttf) format("truetype");
+// }
 body {
     margin: 0;
-    font-family: "BellMT", -apple-system,
-        BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell",
-        "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
+    font-family: "Libre Baskerville",
+        "Abyssinica SIL", serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     a {

@@ -20,6 +20,8 @@ import AuthStateChange from "./components/util/AuthStateChange";
 import EditNavAlert from "./components/util/EditNavAlert";
 // import Dashboard from "./components/dashboard/Dashboard";
 import favicon from "./assets/favicon.ico";
+import BellMT from "./fonts/BellMT.ttf";
+import playFairFont from "./fonts/PlayfairDisplay-Regular.ttf";
 
 const Dashboard = React.lazy(() =>
     import("./components/dashboard/Dashboard.js")
@@ -33,9 +35,11 @@ const Appp = () => {
         (state) => state.app
     );
     useEffect(() => {
+        /// STYLE IMPORTS
         document
             .querySelector("head link[rel=icon]")
             .setAttribute("href", favicon);
+        // console.log(BellMT);
     }, []);
     return (
         <div className='outerContainer'>
