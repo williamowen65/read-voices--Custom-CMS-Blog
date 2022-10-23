@@ -1,3 +1,8 @@
+import {
+    getDownloadURL,
+    ref,
+    uploadBytesResumable,
+} from "firebase/storage";
 import React, {
     useEffect,
     useState,
@@ -11,6 +16,7 @@ import {
     useSelector,
 } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { storage } from "../../firebase-setup";
 import {
     setButtonsForStory,
     setTitleAndDescriptionForStory,
@@ -41,6 +47,7 @@ export function FormTemplate({
     const { isEditing } = useSelector(
         (state) => state.app
     );
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         if (story) {
@@ -176,8 +183,35 @@ export function FormTemplate({
     };
 
     const handleFileUpload = (e) => {
-        console.log(e.target.files);
-        const path = e.target.value;
+        const file = e.target.files[0];
+        if (!file) return;
+        const storageRef = ref(
+            storage,
+            `/files/${file.name}`
+        );
+        const uploadTask = uploadBytesResumable(
+            storageRef,
+            file
+        );
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred /
+                        snapshot.totalBytes) *
+                        100
+                );
+                setProgress(progress);
+            },
+            (err) => console.log(err),
+            () => {
+                getDownloadURL(
+                    uploadTask.snapshot.ref
+                ).then((url) => {
+                    console.log(url);
+                });
+            }
+        );
     };
 
     return (
@@ -220,6 +254,7 @@ export function FormTemplate({
                             className='plus'
                         />
                     )}
+                    <h3>Uploaded {progress}%</h3>
                 </div>
                 <div>
                     <input
