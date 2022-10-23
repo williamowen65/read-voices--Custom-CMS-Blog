@@ -246,7 +246,7 @@ export function FormTemplate({
                     <img
                         src='https://via.placeholder.com/150x227'
                         alt=''
-                        srcset=''
+                        srcSet=''
                     />
                     {isEditing && (
                         <CgMathPlus

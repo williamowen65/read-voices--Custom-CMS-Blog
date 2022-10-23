@@ -6,10 +6,10 @@ import { setLoggedIn } from "../../redux/appReducer";
 export default function AuthStateChange(props) {
     const dispatch = useDispatch();
     onAuthStateChanged(auth, (user) => {
-        console.log(
-            "auth status changed: ",
-            user
-        );
+        // console.log(
+        //     "auth status changed: ",
+        //     user
+        // );
         if (user) {
             dispatch(setLoggedIn(true));
         } else {

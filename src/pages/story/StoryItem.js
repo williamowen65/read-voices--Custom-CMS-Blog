@@ -50,7 +50,7 @@ export default function StoryItem({ story }) {
                     <img
                         src='https://via.placeholder.com/150x227'
                         alt=''
-                        srcset=''
+                        srcSet=''
                     />
                     <div className='floatBox'>
                         <header className='story'>
@@ -78,7 +78,7 @@ export default function StoryItem({ story }) {
                                             el.link
                                         )
                                     }
-                                    key={el.id}
+                                    key={i}
                                 >
                                     {el.text}
                                 </button>
