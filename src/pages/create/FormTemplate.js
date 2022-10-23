@@ -175,12 +175,19 @@ export function FormTemplate({
             .click();
     };
 
+    const handleFileUpload = (e) => {
+        console.log(e.target.files);
+        const path = e.target.value;
+    };
+
     return (
         <>
             <form style={{ display: "none" }}>
                 <input
                     type='file'
                     id='fileDialogId'
+                    accept='.png, .jpg, .jpeg'
+                    onChange={handleFileUpload}
                 />
             </form>
             <form

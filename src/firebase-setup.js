@@ -20,6 +20,12 @@ import {
     signInWithEmailAndPassword,
     signOut,
 } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+
+import {
+    initializeAppCheck,
+    ReCaptchaV3Provider,
+} from "firebase/app-check";
 
 import {
     getAnalytics,
@@ -40,12 +46,22 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
-
 // init services
 // console.log("hi");
 
 export const db = getFirestore();
 export const auth = getAuth();
+export const storage = getStorage(app);
+
+const appCheck = initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider(
+        "6Lf7cKYiAAAAADzZxykPfLD8q6ycbbgybW7BfJ95"
+    ),
+
+    // Optional argument. If true, the SDK automatically refreshes App Check
+    // tokens as needed.
+    isTokenAutoRefreshEnabled: true,
+});
 
 // collection ref
 
