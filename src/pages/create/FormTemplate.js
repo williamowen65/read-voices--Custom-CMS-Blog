@@ -169,155 +169,180 @@ export function FormTemplate({
         // }
     };
 
+    const handleImagePrompt = () => {
+        document
+            .getElementById("fileDialogId")
+            .click();
+    };
+
     return (
-        <form
-            className='storyStyle create'
-            onSubmit={(e) => e.preventDefault()}
-        >
-            <div
-                className={
-                    "imgContainer " +
-                    (isEditing
-                        ? "isEditing "
-                        : "")
+        <>
+            <form style={{ display: "none" }}>
+                <input
+                    type='file'
+                    id='fileDialogId'
+                />
+            </form>
+            <form
+                className='storyStyle create'
+                onSubmit={(e) =>
+                    e.preventDefault()
                 }
             >
-                <img
-                    src='https://via.placeholder.com/150x227'
-                    alt=''
-                    srcset=''
-                />
-                {isEditing && (
-                    <CgMathPlus
-                        size={55}
-                        className='plus'
+                <div
+                    className={
+                        "imgContainer " +
+                        (isEditing
+                            ? "isEditing "
+                            : "")
+                    }
+                    onClick={() => {
+                        if (isEditing) {
+                            handleImagePrompt();
+                        }
+                    }}
+                >
+                    <img
+                        src='https://via.placeholder.com/150x227'
+                        alt=''
+                        srcset=''
                     />
-                )}
-            </div>
-            <div>
-                <input
-                    placeholder='Title'
-                    autoComplete='off'
-                    type='text'
-                    name='title'
-                    id='title'
-                />
-                <input
-                    placeholder='Publish date'
-                    autoComplete='off'
-                    type='date'
-                    id='date'
-                    name='date'
-                />
-                <textarea
-                    className='summernote'
-                    placeholder='Description'
-                    id='summernote'
-                    name='description'
-                ></textarea>
+                    {isEditing && (
+                        <CgMathPlus
+                            size={55}
+                            className='plus'
+                        />
+                    )}
+                </div>
                 <div>
-                    <header>Add Links</header>
-                    <div className='links'>
-                        <div className='addLinkContainer'>
-                            <input
-                                type='text'
-                                name='text'
-                                id='text'
-                                placeholder='Label'
-                            />
-                            <input
-                                type='text'
-                                name='link'
-                                id='link'
-                                placeholder='Link to story'
-                                autoComplete='off'
-                                onFocus={(e) => {
-                                    e.target.value =
-                                        "https://www.";
-                                }}
-                            />
-                        </div>
-                        <button
-                            className='add'
-                            onClick={handleAddBtn}
-                        >
-                            <div>+</div>
-                        </button>
-                        <div className='newButtons'>
-                            {buttons.map(
-                                (e, i) => {
-                                    let key =
-                                        i +
-                                        Math.random() *
-                                            Math.random() *
-                                            30;
-                                    return (
-                                        <div
-                                            className='btnContainer'
-                                            key={
-                                                key
-                                            }
-                                            data-id={
-                                                e.id
-                                            }
-                                        >
-                                            <CgClose
-                                                className='delBtn'
-                                                onClick={() =>
-                                                    handleDelBtn(
-                                                        e.text,
-                                                        e.link
-                                                    )
-                                                }
-                                            />
-                                            <button>
-                                                <a
-                                                    href={
-                                                        e.link
-                                                    }
-                                                    target='_blank'
-                                                    rel='noreferrer'
-                                                >
-                                                    {
-                                                        e.text
-                                                    }
-                                                </a>
-                                            </button>
-                                        </div>
-                                    );
+                    <input
+                        placeholder='Title'
+                        autoComplete='off'
+                        type='text'
+                        name='title'
+                        id='title'
+                    />
+                    <input
+                        placeholder='Publish date'
+                        autoComplete='off'
+                        type='date'
+                        id='date'
+                        name='date'
+                    />
+                    <textarea
+                        className='summernote'
+                        placeholder='Description'
+                        id='summernote'
+                        name='description'
+                    ></textarea>
+                    <div>
+                        <header>Add Links</header>
+                        <div className='links'>
+                            <div className='addLinkContainer'>
+                                <input
+                                    type='text'
+                                    name='text'
+                                    id='text'
+                                    placeholder='Label'
+                                />
+                                <input
+                                    type='text'
+                                    name='link'
+                                    id='link'
+                                    placeholder='Link to story'
+                                    autoComplete='off'
+                                    onFocus={(
+                                        e
+                                    ) => {
+                                        e.target.value =
+                                            "https://www.";
+                                    }}
+                                />
+                            </div>
+                            <button
+                                className='add'
+                                onClick={
+                                    handleAddBtn
                                 }
-                            )}
+                            >
+                                <div>+</div>
+                            </button>
+                            <div className='newButtons'>
+                                {buttons.map(
+                                    (e, i) => {
+                                        let key =
+                                            i +
+                                            Math.random() *
+                                                Math.random() *
+                                                30;
+                                        return (
+                                            <div
+                                                className='btnContainer'
+                                                key={
+                                                    key
+                                                }
+                                                data-id={
+                                                    e.id
+                                                }
+                                            >
+                                                <CgClose
+                                                    className='delBtn'
+                                                    onClick={() =>
+                                                        handleDelBtn(
+                                                            e.text,
+                                                            e.link
+                                                        )
+                                                    }
+                                                />
+                                                <button>
+                                                    <a
+                                                        href={
+                                                            e.link
+                                                        }
+                                                        target='_blank'
+                                                        rel='noreferrer'
+                                                    >
+                                                        {
+                                                            e.text
+                                                        }
+                                                    </a>
+                                                </button>
+                                            </div>
+                                        );
+                                    }
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {!location.pathname.includes(
-                    "/story/"
-                ) && (
-                    <>
-                        <button
-                            onClick={() =>
-                                handleSave(
-                                    "public",
-                                    buttons
-                                )
-                            }
-                        >
-                            Publish
-                        </button>
-                        <button
-                            onClick={() => {
-                                handleSave(
-                                    "draft",
-                                    buttons
-                                );
-                            }}
-                        >
-                            Save as Draft
-                        </button>
-                    </>
-                )}
-            </div>
-        </form>
+                    {!location.pathname.includes(
+                        "/story/"
+                    ) && (
+                        <>
+                            <button
+                                onClick={() =>
+                                    handleSave(
+                                        "public",
+                                        buttons
+                                    )
+                                }
+                            >
+                                Publish
+                            </button>
+                            <button
+                                onClick={() => {
+                                    handleSave(
+                                        "draft",
+                                        buttons
+                                    );
+                                }}
+                            >
+                                Save as Draft
+                            </button>
+                        </>
+                    )}
+                </div>
+            </form>
+        </>
     );
 }
