@@ -3,7 +3,10 @@ import React, {
     useState,
 } from "react";
 import { CgClose } from "react-icons/cg";
-import { useDispatch } from "react-redux";
+import {
+    useDispatch,
+    useSelector,
+} from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
     setButtonsForStory,
@@ -32,6 +35,9 @@ export function FormTemplate({
     const [buttons, setButtons] = useState([]);
     // console.log("editing: ", story);
     const location = useLocation();
+    const { isEditing } = useSelector(
+        (state) => state.app
+    );
 
     useEffect(() => {
         if (story) {
@@ -165,122 +171,138 @@ export function FormTemplate({
             className='storyStyle create'
             onSubmit={(e) => e.preventDefault()}
         >
-            <input
-                placeholder='Title'
-                autoComplete='off'
-                type='text'
-                name='title'
-                id='title'
+            <img
+                src='https://via.placeholder.com/150x227'
+                alt=''
+                srcset=''
+                className={
+                    isEditing ? "isEditing" : null
+                }
             />
-            <input
-                placeholder='Publish date'
-                autoComplete='off'
-                type='date'
-                id='date'
-                name='date'
-            />
-            <textarea
-                className='summernote'
-                placeholder='Description'
-                id='summernote'
-                name='description'
-            ></textarea>
             <div>
-                <header>Add Links</header>
-                <div className='links'>
-                    <div className='addLinkContainer'>
-                        <input
-                            type='text'
-                            name='text'
-                            id='text'
-                            placeholder='Label'
-                        />
-                        <input
-                            type='text'
-                            name='link'
-                            id='link'
-                            placeholder='Link to story'
-                            autoComplete='off'
-                            onFocus={(e) => {
-                                e.target.value =
-                                    "https://www.";
-                            }}
-                        />
-                    </div>
-                    <button
-                        className='add'
-                        onClick={handleAddBtn}
-                    >
-                        <div>+</div>
-                    </button>
-                    <div className='newButtons'>
-                        {buttons.map((e, i) => {
-                            let key =
-                                i +
-                                Math.random() *
-                                    Math.random() *
-                                    30;
-                            return (
-                                <div
-                                    className='btnContainer'
-                                    key={key}
-                                    data-id={e.id}
-                                >
-                                    <CgClose
-                                        className='delBtn'
-                                        onClick={() =>
-                                            handleDelBtn(
-                                                e.text,
-                                                e.link
-                                            )
-                                        }
-                                    />
-                                    <button>
-                                        <a
-                                            href={
-                                                e.link
+                <input
+                    placeholder='Title'
+                    autoComplete='off'
+                    type='text'
+                    name='title'
+                    id='title'
+                />
+                <input
+                    placeholder='Publish date'
+                    autoComplete='off'
+                    type='date'
+                    id='date'
+                    name='date'
+                />
+                <textarea
+                    className='summernote'
+                    placeholder='Description'
+                    id='summernote'
+                    name='description'
+                ></textarea>
+                <div>
+                    <header>Add Links</header>
+                    <div className='links'>
+                        <div className='addLinkContainer'>
+                            <input
+                                type='text'
+                                name='text'
+                                id='text'
+                                placeholder='Label'
+                            />
+                            <input
+                                type='text'
+                                name='link'
+                                id='link'
+                                placeholder='Link to story'
+                                autoComplete='off'
+                                onFocus={(e) => {
+                                    e.target.value =
+                                        "https://www.";
+                                }}
+                            />
+                        </div>
+                        <button
+                            className='add'
+                            onClick={handleAddBtn}
+                        >
+                            <div>+</div>
+                        </button>
+                        <div className='newButtons'>
+                            {buttons.map(
+                                (e, i) => {
+                                    let key =
+                                        i +
+                                        Math.random() *
+                                            Math.random() *
+                                            30;
+                                    return (
+                                        <div
+                                            className='btnContainer'
+                                            key={
+                                                key
                                             }
-                                            target='_blank'
-                                            rel='noreferrer'
+                                            data-id={
+                                                e.id
+                                            }
                                         >
-                                            {
-                                                e.text
-                                            }
-                                        </a>
-                                    </button>
-                                </div>
-                            );
-                        })}
+                                            <CgClose
+                                                className='delBtn'
+                                                onClick={() =>
+                                                    handleDelBtn(
+                                                        e.text,
+                                                        e.link
+                                                    )
+                                                }
+                                            />
+                                            <button>
+                                                <a
+                                                    href={
+                                                        e.link
+                                                    }
+                                                    target='_blank'
+                                                    rel='noreferrer'
+                                                >
+                                                    {
+                                                        e.text
+                                                    }
+                                                </a>
+                                            </button>
+                                        </div>
+                                    );
+                                }
+                            )}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {!location.pathname.includes(
-                "/story/"
-            ) && (
-                <>
-                    <button
-                        onClick={() =>
-                            handleSave(
-                                "public",
-                                buttons
-                            )
-                        }
-                    >
-                        Publish
-                    </button>
-                    <button
-                        onClick={() => {
-                            handleSave(
-                                "draft",
-                                buttons
-                            );
-                        }}
-                    >
-                        Save as Draft
-                    </button>
-                </>
-            )}
+                {!location.pathname.includes(
+                    "/story/"
+                ) && (
+                    <>
+                        <button
+                            onClick={() =>
+                                handleSave(
+                                    "public",
+                                    buttons
+                                )
+                            }
+                        >
+                            Publish
+                        </button>
+                        <button
+                            onClick={() => {
+                                handleSave(
+                                    "draft",
+                                    buttons
+                                );
+                            }}
+                        >
+                            Save as Draft
+                        </button>
+                    </>
+                )}
+            </div>
         </form>
     );
 }
