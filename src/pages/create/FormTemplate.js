@@ -2,7 +2,10 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import { CgClose } from "react-icons/cg";
+import {
+    CgClose,
+    CgMathPlus,
+} from "react-icons/cg";
 import {
     useDispatch,
     useSelector,
@@ -171,14 +174,26 @@ export function FormTemplate({
             className='storyStyle create'
             onSubmit={(e) => e.preventDefault()}
         >
-            <img
-                src='https://via.placeholder.com/150x227'
-                alt=''
-                srcset=''
+            <div
                 className={
-                    isEditing ? "isEditing" : null
+                    "imgContainer " +
+                    (isEditing
+                        ? "isEditing "
+                        : "")
                 }
-            />
+            >
+                <img
+                    src='https://via.placeholder.com/150x227'
+                    alt=''
+                    srcset=''
+                />
+                {isEditing && (
+                    <CgMathPlus
+                        size={55}
+                        className='plus'
+                    />
+                )}
+            </div>
             <div>
                 <input
                     placeholder='Title'
