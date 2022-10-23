@@ -23,6 +23,9 @@ body {
 .App {
     /* flex-grow: 1;
     display: flex; */
+    p {
+        text-align: justify;
+    }
 }
 
 .outerContainer {
