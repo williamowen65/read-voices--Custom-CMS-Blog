@@ -42,11 +42,25 @@ const storySlice = createSlice({
                 return story;
             });
         },
+        setImgUrlForStory: (state, action) => {
+            state.stories.map((story) => {
+                if (
+                    story.slug ===
+                    action.payload.slug
+                ) {
+                    story.imgUrl =
+                        action.payload.imgUrl;
+                }
+                return story;
+            });
+        },
     },
 });
 
 export const setStories =
     storySlice.actions.setStories;
+export const setImgUrlForStory =
+    storySlice.actions.setImgUrlForStory;
 export const setTitleAndDescriptionForStory =
     storySlice.actions
         .setTitleAndDescriptionForStory;

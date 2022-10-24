@@ -37,7 +37,11 @@ export default function Create() {
         return <PageNotFound />;
     }
 
-    const handleSave = (status, buttons) => {
+    const handleSave = (
+        status,
+        buttons,
+        imgUrl
+    ) => {
         const form = document.querySelector(
             "form.create"
         );
@@ -87,7 +91,7 @@ export default function Create() {
                 delete btn.id;
                 return btn;
             }),
-
+            imgUrl,
             slug: slugify(title),
             meta: {
                 createdAt: serverTimestamp(),

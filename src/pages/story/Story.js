@@ -43,6 +43,8 @@ export default function Story() {
     const { stories } = useSelector(
         (state) => state.stories
     );
+    const [imgUrl, setImgUrl] = useState(null);
+
     const { loggedIn, isEditing } = useSelector(
         (state) => state.app
     );
@@ -109,6 +111,7 @@ export default function Story() {
             status: status,
             title,
             description,
+            imgUrl: story.imgUrl,
             slug: slugify(title),
             buttons: story.buttons,
             meta: {

@@ -47,11 +47,17 @@ export default function StoryItem({ story }) {
                     />
                 </div>
                 <div className='item'>
-                    <img
-                        src='https://via.placeholder.com/150x227'
-                        alt=''
-                        srcSet=''
-                    />
+                    {story.imgUrl && (
+                        <img
+                            src={story.imgUrl}
+                            style={{
+                                width: "150px",
+                                height: "227px",
+                            }}
+                            alt=''
+                            srcSet=''
+                        />
+                    )}
                     <div className='floatBox'>
                         <header className='story'>
                             <h2>{story.title}</h2>

@@ -9,6 +9,9 @@
 
         height: fit-content;
         position: relative;
+        h3 {
+            position: absolute;
+        }
         .plus {
             opacity: 0;
             position: absolute;

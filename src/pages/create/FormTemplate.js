@@ -20,6 +20,7 @@ import { storage } from "../../firebase-setup";
 import {
     setButtonsForStory,
     setTitleAndDescriptionForStory,
+    setImgUrlForStory,
 } from "../../redux/storyReducer";
 import { slugify } from "../../utilFns/slugify";
 const isValidUrl = (urlString) => {
@@ -48,6 +49,7 @@ export function FormTemplate({
         (state) => state.app
     );
     const [progress, setProgress] = useState(0);
+    // const [imgUrl, setImgUrl] = useState(null);
 
     useEffect(() => {
         if (story) {
@@ -208,7 +210,12 @@ export function FormTemplate({
                 getDownloadURL(
                     uploadTask.snapshot.ref
                 ).then((url) => {
-                    console.log(url);
+                    dispatch(
+                        setImgUrlForStory({
+                            slug: story.slug,
+                            imgUrl: url,
+                        })
+                    );
                 });
             }
         );
@@ -244,7 +251,15 @@ export function FormTemplate({
                     }}
                 >
                     <img
-                        src='https://via.placeholder.com/150x227'
+                        src={
+                            story.imgUrl
+                                ? story.imgUrl
+                                : "https://via.placeholder.com/150x227"
+                        }
+                        style={{
+                            width: "150px",
+                            height: "227px",
+                        }}
                         alt=''
                         srcSet=''
                     />
@@ -365,7 +380,8 @@ export function FormTemplate({
                                 onClick={() =>
                                     handleSave(
                                         "public",
-                                        buttons
+                                        buttons,
+                                        story.imgUrl
                                     )
                                 }
                             >
