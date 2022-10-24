@@ -30,6 +30,7 @@ import {
 import { db } from "../../firebase-setup";
 import { FormTemplate } from "../create/FormTemplate";
 import { slugify } from "../../utilFns/slugify";
+import { setImgUrlForStory } from "../../redux/storyReducer";
 const DeleteStoryPrompt = React.lazy(() =>
     import(
         "../../components/modals/DeleteStoryPrompt"
@@ -40,10 +41,9 @@ export default function Story() {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const { slug } = useParams();
-    const { stories } = useSelector(
+    const { stories, newImgUrl } = useSelector(
         (state) => state.stories
     );
-    const [imgUrl, setImgUrl] = useState(null);
 
     const { loggedIn, isEditing } = useSelector(
         (state) => state.app
@@ -63,6 +63,9 @@ export default function Story() {
         setShowDelPrompt(false);
     };
     const handleEditMode = () => {
+        if (isEditing) {
+            dispatch(setImgUrlForStory(null));
+        }
         dispatch(setIsEditing(!isEditing));
     };
     const handleUpdate = (status) => {
@@ -111,7 +114,7 @@ export default function Story() {
             status: status,
             title,
             description,
-            imgUrl: story.imgUrl,
+            imgUrl: newImgUrl || story.imgUrl,
             slug: slugify(title),
             buttons: story.buttons,
             meta: {

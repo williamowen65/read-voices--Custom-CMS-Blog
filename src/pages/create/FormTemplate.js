@@ -20,7 +20,7 @@ import { storage } from "../../firebase-setup";
 import {
     setButtonsForStory,
     setTitleAndDescriptionForStory,
-    // setImgUrlForStory,
+    setImgUrlForStory,
 } from "../../redux/storyReducer";
 import { slugify } from "../../utilFns/slugify";
 const isValidUrl = (urlString) => {
@@ -50,14 +50,10 @@ export function FormTemplate({
         (state) => state.app
     );
     const [progress, setProgress] = useState(0);
+    const { newImgUrl } = useSelector(
+        (state) => state.stories
+    );
     // const [imgUrl, setImgUrl] = useState(null);
-
-    const [newImgUrl, setNewImgUrl] =
-        useState(null);
-
-    useEffect(() => {
-        helpers.getNewImageUrl(newImgUrl);
-    }, [newImgUrl, helpers]);
 
     useEffect(() => {
         if (story) {
@@ -218,13 +214,10 @@ export function FormTemplate({
                 getDownloadURL(
                     uploadTask.snapshot.ref
                 ).then((url) => {
-                    // dispatch(
-                    //     setImgUrlForStory({
-                    //         slug: story.slug,
-                    //         imgUrl: url,
-                    //     })
-                    // );
-                    setNewImgUrl(url);
+                    dispatch(
+                        setImgUrlForStory(url)
+                    );
+                    // setNewImgUrl(url);
                 });
             }
         );
@@ -261,7 +254,9 @@ export function FormTemplate({
                 >
                     <img
                         src={
-                            story.imgUrl
+                            newImgUrl
+                                ? newImgUrl
+                                : story.imgUrl
                                 ? story.imgUrl
                                 : "https://via.placeholder.com/150x227"
                         }

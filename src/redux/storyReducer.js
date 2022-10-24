@@ -4,6 +4,7 @@ const storySlice = createSlice({
     name: "story",
     initialState: {
         stories: [],
+        newImgUrl: null,
     },
     reducers: {
         setStories: (state, action) => {
@@ -43,16 +44,17 @@ const storySlice = createSlice({
             });
         },
         setImgUrlForStory: (state, action) => {
-            state.stories.map((story) => {
-                if (
-                    story.slug ===
-                    action.payload.slug
-                ) {
-                    story.imgUrl =
-                        action.payload.imgUrl;
-                }
-                return story;
-            });
+            // state.stories.map((story) => {
+            //     if (
+            //         story.slug ===
+            //         action.payload.slug
+            //     ) {
+            //         story.imgUrl =
+            //             action.payload.imgUrl;
+            //     }
+            //     return story;
+            // });
+            state.newImgUrl = action.payload;
         },
     },
 });
