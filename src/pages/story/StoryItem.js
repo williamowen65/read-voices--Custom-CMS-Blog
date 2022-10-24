@@ -59,7 +59,13 @@ export default function StoryItem({ story }) {
                         />
                     )}
                     <div className='floatBox'>
-                        <header className='story'>
+                        <header
+                            className={
+                                story.imgUrl
+                                    ? "story"
+                                    : "story noImg"
+                            }
+                        >
                             <h2>{story.title}</h2>
                             <p>
                                 {story.meta.publishedAt?.slice(
