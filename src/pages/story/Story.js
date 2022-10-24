@@ -31,6 +31,7 @@ import { db } from "../../firebase-setup";
 import { FormTemplate } from "../create/FormTemplate";
 import { slugify } from "../../utilFns/slugify";
 import { setImgUrlForStory } from "../../redux/storyReducer";
+import useEditDispatches from "../../hooks/useEditDispatches";
 const DeleteStoryPrompt = React.lazy(() =>
     import(
         "../../components/modals/DeleteStoryPrompt"
@@ -40,6 +41,8 @@ const DeleteStoryPrompt = React.lazy(() =>
 export default function Story() {
     const nav = useNavigate();
     const dispatch = useDispatch();
+    const { triggerDispatches } =
+        useEditDispatches();
     const { slug } = useParams();
     const { stories, newImgUrl } = useSelector(
         (state) => state.stories
@@ -63,11 +66,9 @@ export default function Story() {
         setShowDelPrompt(false);
     };
     const handleEditMode = () => {
-        if (isEditing) {
-            dispatch(setImgUrlForStory(null));
-        }
-        dispatch(setIsEditing(!isEditing));
+        triggerDispatches();
     };
+
     const handleUpdate = (status) => {
         const docRef = doc(
             db,

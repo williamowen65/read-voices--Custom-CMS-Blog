@@ -12,9 +12,12 @@ import {
 } from "react-router-dom";
 import { setIsEditing } from "../../redux/appReducer";
 import { setImgUrlForStory } from "../../redux/storyReducer";
+import useEditDispatches from "../../hooks/useEditDispatches";
 
 export default function Dashboard() {
     const dispatch = useDispatch();
+    const { triggerDispatches } =
+        useEditDispatches();
     const { stories } = useSelector(
         (state) => state.stories
     );
@@ -53,18 +56,7 @@ export default function Dashboard() {
                             navigate(
                                 `/story/${el.slug}`
                             );
-                            if (isEditing) {
-                                dispatch(
-                                    setImgUrlForStory(
-                                        null
-                                    )
-                                );
-                            }
-                            dispatch(
-                                setIsEditing(
-                                    false
-                                )
-                            );
+                            triggerDispatches();
                         }}
                         className={
                             activeSlug === el.slug
