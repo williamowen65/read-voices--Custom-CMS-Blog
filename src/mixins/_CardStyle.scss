@@ -35,6 +35,11 @@
                     margin-bottom: 25px;
                 }
                 // position: absolute;
+                &.noImg {
+                    width: calc(
+                        233px + 150px + 20px
+                    );
+                }
                 h2,
                 p {
                     display: inline;
