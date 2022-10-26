@@ -44,16 +44,9 @@ const storySlice = createSlice({
             });
         },
         setImgUrlForStory: (state, action) => {
-            // state.stories.map((story) => {
-            //     if (
-            //         story.slug ===
-            //         action.payload.slug
-            //     ) {
-            //         story.imgUrl =
-            //             action.payload.imgUrl;
-            //     }
-            //     return story;
-            // });
+            /*
+            payload: null || {url,name}
+            */
             state.newImg = action.payload;
         },
     },

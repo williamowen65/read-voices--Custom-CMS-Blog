@@ -20,6 +20,13 @@
             translate: -50% -50%;
             color: rgb(216, 193, 193);
         }
+        .deleteImg {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            right: 5px;
+            z-index: 1;
+        }
         &:hover {
             &::before {
                 content: "";
@@ -37,7 +44,8 @@
                 );
                 border-radius: 50%;
             }
-            .plus {
+            .plus,
+            .deleteImg {
                 opacity: 1;
             }
         }

@@ -249,11 +249,6 @@ export function FormTemplate({
                             ? "isEditing "
                             : "")
                     }
-                    onClick={() => {
-                        if (isEditing) {
-                            handleImagePrompt();
-                        }
-                    }}
                 >
                     <img
                         src={
@@ -269,12 +264,30 @@ export function FormTemplate({
                         }}
                         alt=''
                         srcSet=''
+                        onClick={() => {
+                            if (isEditing) {
+                                handleImagePrompt();
+                            }
+                        }}
                     />
                     {isEditing && (
-                        <CgMathPlus
-                            size={55}
-                            className='plus'
-                        />
+                        <>
+                            <CgMathPlus
+                                size={55}
+                                className='plus'
+                                onClick={() => {
+                                    if (
+                                        isEditing
+                                    ) {
+                                        handleImagePrompt();
+                                    }
+                                }}
+                            />
+                            <CgClose
+                                size={30}
+                                className='deleteImg'
+                            />
+                        </>
                     )}
                     <h3>Uploaded {progress}%</h3>
                 </div>
