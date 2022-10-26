@@ -44,7 +44,7 @@ export default function Story() {
     const { triggerDispatches } =
         useEditDispatches();
     const { slug } = useParams();
-    const { stories, newImgUrl } = useSelector(
+    const { stories, newImg } = useSelector(
         (state) => state.stories
     );
 
@@ -115,7 +115,10 @@ export default function Story() {
             status: status,
             title,
             description,
-            imgUrl: newImgUrl || story.imgUrl,
+            img: {
+                url: newImg.url || story.img.url,
+                name: newImg.name,
+            },
             slug: slugify(title),
             buttons: story.buttons,
             meta: {

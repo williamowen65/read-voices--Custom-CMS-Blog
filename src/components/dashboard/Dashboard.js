@@ -56,7 +56,9 @@ export default function Dashboard() {
                             navigate(
                                 `/story/${el.slug}`
                             );
-                            triggerDispatches();
+                            if (isEditing) {
+                                triggerDispatches();
+                            }
                         }}
                         className={
                             activeSlug === el.slug

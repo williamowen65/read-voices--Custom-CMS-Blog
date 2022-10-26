@@ -47,9 +47,9 @@ export default function StoryItem({ story }) {
                     />
                 </div>
                 <div className='item'>
-                    {story.imgUrl && (
+                    {story.img && (
                         <img
-                            src={story.imgUrl}
+                            src={story.img.url}
                             style={{
                                 width: "150px",
                                 height: "227px",
@@ -61,7 +61,7 @@ export default function StoryItem({ story }) {
                     <div className='floatBox'>
                         <header
                             className={
-                                story.imgUrl
+                                story.img
                                     ? "story"
                                     : "story noImg"
                             }

@@ -4,7 +4,7 @@ const storySlice = createSlice({
     name: "story",
     initialState: {
         stories: [],
-        newImgUrl: null,
+        newImg: null,
     },
     reducers: {
         setStories: (state, action) => {
@@ -54,7 +54,7 @@ const storySlice = createSlice({
             //     }
             //     return story;
             // });
-            state.newImgUrl = action.payload;
+            state.newImg = action.payload;
         },
     },
 });

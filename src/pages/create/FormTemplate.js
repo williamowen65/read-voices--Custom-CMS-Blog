@@ -50,7 +50,7 @@ export function FormTemplate({
         (state) => state.app
     );
     const [progress, setProgress] = useState(0);
-    const { newImgUrl } = useSelector(
+    const { newImg } = useSelector(
         (state) => state.stories
     );
     // const [imgUrl, setImgUrl] = useState(null);
@@ -215,7 +215,10 @@ export function FormTemplate({
                     uploadTask.snapshot.ref
                 ).then((url) => {
                     dispatch(
-                        setImgUrlForStory(url)
+                        setImgUrlForStory({
+                            url,
+                            name: `/files/${file.name}`,
+                        })
                     );
                     // setNewImgUrl(url);
                 });
@@ -254,10 +257,10 @@ export function FormTemplate({
                 >
                     <img
                         src={
-                            newImgUrl
-                                ? newImgUrl
-                                : story.imgUrl
-                                ? story.imgUrl
+                            newImg
+                                ? newImg.url
+                                : story?.img?.url
+                                ? story?.img?.url
                                 : "https://via.placeholder.com/150x227"
                         }
                         style={{
