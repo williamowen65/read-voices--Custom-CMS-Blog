@@ -383,8 +383,7 @@ export function FormTemplate({
                                 onClick={() =>
                                     handleSave(
                                         "public",
-                                        buttons,
-                                        story.img
+                                        buttons
                                     )
                                 }
                             >

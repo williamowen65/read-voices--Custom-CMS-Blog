@@ -9,17 +9,31 @@ import {
     uploadBytesResumable,
 } from "firebase/storage";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import {
+    useDispatch,
+    useSelector,
+} from "react-redux";
 import { db, storage } from "../firebase-setup";
 import { setImgUrlForStory } from "../redux/storyReducer";
 
 export default function useUploadImg({ story }) {
     const dispatch = useDispatch();
     const [progress, setProgress] = useState(0);
-    const handleFileUpload = (newStory) => {
-        if (newStory) {
-            story = newStory;
-        }
+    const { stories } = useSelector(
+        (state) => state.stories
+    );
+    const handleFileUpload = (newStoryId) => {
+        // if (newStoryId) {
+        //     story = stories.filter(
+        //         (el) => el.id == newStoryId
+        //     )[0];
+        //     console.log(
+        //         "STORIES ",
+        //         stories,
+        //         newStoryId,
+        //         story
+        //     );
+        // }
         if (story?.img) {
             // console.log(
             //     "TRYING TO DELETE THIS IMG",
@@ -61,10 +75,11 @@ export default function useUploadImg({ story }) {
                 getDownloadURL(
                     uploadTask.snapshot.ref
                 ).then((url) => {
+                    console.log("STORY ", story);
                     const docRef = doc(
                         db,
                         "stories",
-                        story.id
+                        story?.id || newStoryId
                     );
 
                     const docc = {

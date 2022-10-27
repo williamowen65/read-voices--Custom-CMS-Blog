@@ -129,9 +129,7 @@ export default function Create() {
                     "success saving doc",
                     res
                 );
-                // if (isEditing) {
-                //     handleFileUpload();
-                // }
+                handleFileUpload(res.id);
                 navigate("/");
             })
             .catch((err) => {
