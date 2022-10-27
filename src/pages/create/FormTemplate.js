@@ -207,6 +207,16 @@ export function FormTemplate({
         ).innerText = "Image Preview";
     };
 
+    const handleDelImgPreview = (e) => {
+        document.querySelector(
+            ".imgContainer img"
+        ).src =
+            "https://via.placeholder.com/150x227";
+        document.querySelector(
+            ".imgFeedback"
+        ).innerText = `Upload Image`;
+    };
+
     return (
         <>
             <form style={{ display: "none" }}>
@@ -267,6 +277,9 @@ export function FormTemplate({
                             <CgClose
                                 size={30}
                                 className='deleteImg'
+                                onClick={
+                                    handleDelImgPreview
+                                }
                             />
                         </>
                     )}
