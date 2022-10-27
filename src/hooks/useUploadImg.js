@@ -3,6 +3,7 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import {
+    deleteObject,
     getDownloadURL,
     ref,
     uploadBytesResumable,
@@ -16,6 +17,17 @@ export default function useUploadImg({ story }) {
     const dispatch = useDispatch();
     const [progress, setProgress] = useState(0);
     const handleFileUpload = (e) => {
+        if (story.img) {
+            console.log(
+                "TRYING TO DELETE THIS IMG",
+                story.img
+            );
+            const storageRef = ref(
+                storage,
+                `${story.img.name}`
+            );
+            deleteObject(storageRef);
+        }
         const file = document.getElementById(
             "fileDialogId"
         ).files[0];
