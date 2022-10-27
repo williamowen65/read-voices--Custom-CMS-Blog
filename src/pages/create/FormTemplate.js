@@ -21,6 +21,7 @@ import {
     setButtonsForStory,
     setTitleAndDescriptionForStory,
     setImgUrlForStory,
+    setButtons,
 } from "../../redux/storyReducer";
 import { slugify } from "../../utilFns/slugify";
 const isValidUrl = (urlString) => {
@@ -43,7 +44,10 @@ export function FormTemplate({
     helpers,
 }) {
     const dispatch = useDispatch();
-    const [buttons, setButtons] = useState([]);
+    // const [buttons, setButtons] = useState([]);
+    const { buttons } = useSelector(
+        (state) => state.stories
+    );
     // console.log("editing: ", story);
     const location = useLocation();
     const { isEditing } = useSelector(
@@ -376,7 +380,7 @@ export function FormTemplate({
                                     handleSave(
                                         "public",
                                         buttons,
-                                        story.imgUrl
+                                        story.img
                                     )
                                 }
                             >

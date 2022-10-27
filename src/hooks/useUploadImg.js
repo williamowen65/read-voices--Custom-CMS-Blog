@@ -17,11 +17,11 @@ export default function useUploadImg({ story }) {
     const dispatch = useDispatch();
     const [progress, setProgress] = useState(0);
     const handleFileUpload = (e) => {
-        if (story.img) {
-            console.log(
-                "TRYING TO DELETE THIS IMG",
-                story.img
-            );
+        if (story?.img) {
+            // console.log(
+            //     "TRYING TO DELETE THIS IMG",
+            //     story.img
+            // );
             const storageRef = ref(
                 storage,
                 `${story.img.name}`
@@ -32,10 +32,13 @@ export default function useUploadImg({ story }) {
             "fileDialogId"
         ).files[0];
         if (!file) return;
-        const storageRef = ref(
-            storage,
-            `/files/${file.name}`
-        );
+        const fileName = `/files/${
+            file.name +
+            "." +
+            Math.random() +
+            10000
+        }`;
+        const storageRef = ref(storage, fileName);
         const uploadTask = uploadBytesResumable(
             storageRef,
             file
@@ -64,14 +67,14 @@ export default function useUploadImg({ story }) {
                     const docc = {
                         img: {
                             url,
-                            name: `/files/${file.name}`,
+                            name: fileName,
                         },
                     };
                     updateDoc(docRef, docc)
                         .then(() => {
-                            console.log(
-                                "success uploading img"
-                            );
+                            // console.log(
+                            //     "success uploading img"
+                            // );
                         })
                         .catch((err) => {
                             console.error(err);

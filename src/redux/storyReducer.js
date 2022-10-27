@@ -5,6 +5,7 @@ const storySlice = createSlice({
     initialState: {
         stories: [],
         newImg: null,
+        buttons: [],
     },
     reducers: {
         setStories: (state, action) => {
@@ -49,11 +50,16 @@ const storySlice = createSlice({
             */
             state.newImg = action.payload;
         },
+        setButtons: (state, action) => {
+            state.buttons = action.payload;
+        },
     },
 });
 
 export const setStories =
     storySlice.actions.setStories;
+export const setButtons =
+    storySlice.actions.setButtons;
 export const setImgUrlForStory =
     storySlice.actions.setImgUrlForStory;
 export const setTitleAndDescriptionForStory =

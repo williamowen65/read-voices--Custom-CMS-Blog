@@ -73,9 +73,12 @@ export default function Story() {
     const { handleFileUpload, progress } =
         useUploadImg({ story });
 
-    const { handleUpdate } = useUploadDoc({
-        story,
-    });
+    const { handleUpdate } = useUploadDoc(
+        "update",
+        {
+            story,
+        }
+    );
 
     const handleSave = (status) => {
         if (isEditing) {

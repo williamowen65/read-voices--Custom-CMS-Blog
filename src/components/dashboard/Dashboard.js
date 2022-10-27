@@ -29,7 +29,7 @@ export default function Dashboard() {
 
     // // const { slug } = useParams();
     useEffect(() => {
-        console.log(activeSlug);
+        // console.log(activeSlug);
     }, []);
 
     return (
