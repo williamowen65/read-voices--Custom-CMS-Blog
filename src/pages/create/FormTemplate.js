@@ -21,7 +21,7 @@ import {
     setButtonsForStory,
     setTitleAndDescriptionForStory,
     setImgUrlForStory,
-    setButtons,
+    // setButtons,
 } from "../../redux/storyReducer";
 import { slugify } from "../../utilFns/slugify";
 const isValidUrl = (urlString) => {
@@ -44,10 +44,10 @@ export function FormTemplate({
     helpers,
 }) {
     const dispatch = useDispatch();
-    // const [buttons, setButtons] = useState([]);
-    const { buttons } = useSelector(
-        (state) => state.stories
-    );
+    const [buttons, setButtons] = useState([]);
+    // const { buttons } = useSelector(
+    //     (state) => state.stories
+    // );
     // console.log("editing: ", story);
     const location = useLocation();
     const { isEditing } = useSelector(
@@ -242,30 +242,38 @@ export function FormTemplate({
                         alt=''
                         srcSet=''
                         onClick={() => {
-                            if (isEditing) {
+                            if (
+                                isEditing ||
+                                window.location.href.includes(
+                                    "create"
+                                )
+                            ) {
                                 handleImagePrompt();
                             }
                         }}
                     />
-                    {isEditing && (
-                        <>
-                            <CgMathPlus
-                                size={55}
-                                className='plus'
-                                onClick={() => {
-                                    if (
-                                        isEditing
-                                    ) {
-                                        handleImagePrompt();
-                                    }
-                                }}
-                            />
-                            <CgClose
-                                size={30}
-                                className='deleteImg'
-                            />
-                        </>
-                    )}
+                    {isEditing ||
+                        (window.location.href.includes(
+                            "create"
+                        ) && (
+                            <>
+                                <CgMathPlus
+                                    size={55}
+                                    className='plus'
+                                    onClick={() => {
+                                        if (
+                                            isEditing
+                                        ) {
+                                            handleImagePrompt();
+                                        }
+                                    }}
+                                />
+                                <CgClose
+                                    size={30}
+                                    className='deleteImg'
+                                />
+                            </>
+                        ))}
                     <h3 className='imgFeedback'>
                         Upload Image
                     </h3>
