@@ -194,6 +194,9 @@ export function FormTemplate({
             ".imgContainer img"
         );
         image.src = URL.createObjectURL(file);
+        document.querySelector(
+            ".imgFeedback"
+        ).innerText = "Image Preview";
     };
 
     return (
@@ -259,7 +262,9 @@ export function FormTemplate({
                             />
                         </>
                     )}
-                    <h3>Uploaded {progress}%</h3>
+                    <h3 className='imgFeedback'>
+                        Upload Image
+                    </h3>
                 </div>
                 <div>
                     <input
