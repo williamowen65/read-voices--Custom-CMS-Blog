@@ -192,6 +192,10 @@ export function FormTemplate({
             .click();
     };
 
+    const imgChecks =
+        isEditing ||
+        window.location.href.includes("create");
+
     const handlePreviewImg = (e) => {
         const file = e.target.files[0];
         const image = document.querySelector(
@@ -222,7 +226,7 @@ export function FormTemplate({
                 <div
                     className={
                         "imgContainer " +
-                        (isEditing
+                        (imgChecks
                             ? "isEditing "
                             : "")
                     }
@@ -242,38 +246,30 @@ export function FormTemplate({
                         alt=''
                         srcSet=''
                         onClick={() => {
-                            if (
-                                isEditing ||
-                                window.location.href.includes(
-                                    "create"
-                                )
-                            ) {
+                            if (imgChecks) {
                                 handleImagePrompt();
                             }
                         }}
                     />
-                    {isEditing ||
-                        (window.location.href.includes(
-                            "create"
-                        ) && (
-                            <>
-                                <CgMathPlus
-                                    size={55}
-                                    className='plus'
-                                    onClick={() => {
-                                        if (
-                                            isEditing
-                                        ) {
-                                            handleImagePrompt();
-                                        }
-                                    }}
-                                />
-                                <CgClose
-                                    size={30}
-                                    className='deleteImg'
-                                />
-                            </>
-                        ))}
+                    {imgChecks && (
+                        <>
+                            <CgMathPlus
+                                size={55}
+                                className='plus'
+                                onClick={() => {
+                                    if (
+                                        imgChecks
+                                    ) {
+                                        handleImagePrompt();
+                                    }
+                                }}
+                            />
+                            <CgClose
+                                size={30}
+                                className='deleteImg'
+                            />
+                        </>
+                    )}
                     <h3 className='imgFeedback'>
                         Upload Image
                     </h3>
