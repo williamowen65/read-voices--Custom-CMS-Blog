@@ -48,93 +48,98 @@ export default function Create() {
         {}
     );
 
-    const handleSave = (status, ...rest) => {
-        const { buttons, img } = rest;
-        if (isEditing) {
-            handleFileUpload();
-        }
-        handleUpdate(status, buttons);
-    };
-
-    // // const handleSave = (
-    // //     status,
-    // //     buttons,
-    // //     imgUrl
-    // // ) => {
-    // //     const form = document.querySelector(
-    // //         "form.create"
-    // //     );
-
-    // //     const title = form.title.value;
-    // //     const date = form.date.value;
-    // //     const description =
-    // //         form.description.value;
-
-    // //     if (status === "draft") {
-    // //         if (!title) {
-    // //             alert(
-    // //                 "Must provide a title to save a draft"
-    // //             );
-    // //             return;
-    // //         }
-    // //     }
-    // //     if (status === "public") {
-    // //         if (
-    // //             !title ||
-    // //             !description ||
-    // //             !buttons.length
-    // //         ) {
-    // //             alert(
-    // //                 "Must provide a title, description, and at least one button to make publish"
-    // //             );
-    // //             return;
-    // //         }
-    // //         if (!date) {
-    // //             // eslint-disable-next-line no-restricted-globals
-    // //             const res = confirm(
-    // //                 "You provided no publish date. Do you want to just use today as the date? You can change it later."
-    // //             );
-    // //             if (!res) {
-    // //                 return;
-    // //             }
-    // //         }
-    // //     }
-
-    //     // console.log(serverTimestamp);
-
-    //     const doc = {
-    //         title,
-    //         description,
-    //         status,
-    //         buttons: buttons.map((btn) => {
-    //             delete btn.id;
-    //             return btn;
-    //         }),
-    //         imgUrl,
-    //         slug: slugify(title),
-    //         meta: {
-    //             createdAt: serverTimestamp(),
-    //             publishedAt: date
-    //                 ? Timestamp.fromDate(
-    //                       new Date(date)
-    //                   )
-    //                 : status === "public"
-    //                 ? serverTimestamp()
-    //                 : null,
-    //         },
-    //     };
-
-    //     addDoc(colRef, doc)
-    //         .then((res) => {
-    //             console.log("success saving doc");
-    //             navigate("/");
-    //         })
-    //         .catch((err) => {
-    //             console.error(err);
-    //         });
-
-    //     // console.log(doc, colRef);
+    // const handleSave = (status, ...rest) => {
+    //     const { buttons, img } = rest;
+    //     if (isEditing) {
+    //         handleFileUpload();
+    //     }
+    //     handleUpdate(status, buttons);
     // };
+
+    const handleSave = (
+        status,
+        buttons,
+        imgUrl
+    ) => {
+        const form = document.querySelector(
+            "form.create"
+        );
+
+        const title = form.title.value;
+        const date = form.date.value;
+        const description =
+            form.description.value;
+
+        if (status === "draft") {
+            if (!title) {
+                alert(
+                    "Must provide a title to save a draft"
+                );
+                return;
+            }
+        }
+        if (status === "public") {
+            if (
+                !title ||
+                !description ||
+                !buttons.length
+            ) {
+                alert(
+                    "Must provide a title, description, and at least one button to make publish"
+                );
+                return;
+            }
+            if (!date) {
+                // eslint-disable-next-line no-restricted-globals
+                const res = confirm(
+                    "You provided no publish date. Do you want to just use today as the date? You can change it later."
+                );
+                if (!res) {
+                    return;
+                }
+            }
+        }
+
+        // console.log(serverTimestamp);
+
+        const doc = {
+            title,
+            description,
+            status,
+            buttons: buttons.map((btn) => {
+                delete btn.id;
+                return btn;
+            }),
+            slug: slugify(title),
+            meta: {
+                createdAt: serverTimestamp(),
+                publishedAt: date
+                    ? Timestamp.fromDate(
+                          new Date(date)
+                      )
+                    : status === "public"
+                    ? serverTimestamp()
+                    : null,
+            },
+        };
+
+        addDoc(colRef, doc)
+            .then((res) => {
+                console.log(
+                    "success saving doc",
+                    res
+                );
+                // if (isEditing) {
+                //     handleFileUpload();
+                // }
+                navigate("/");
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
+        // console.log(doc, colRef);
+    };
 
     if (!loggedIn) {
         return <PageNotFound />;

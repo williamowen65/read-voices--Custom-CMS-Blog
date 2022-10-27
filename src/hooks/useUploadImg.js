@@ -16,7 +16,10 @@ import { setImgUrlForStory } from "../redux/storyReducer";
 export default function useUploadImg({ story }) {
     const dispatch = useDispatch();
     const [progress, setProgress] = useState(0);
-    const handleFileUpload = (e) => {
+    const handleFileUpload = (newStory) => {
+        if (newStory) {
+            story = newStory;
+        }
         if (story?.img) {
             // console.log(
             //     "TRYING TO DELETE THIS IMG",
