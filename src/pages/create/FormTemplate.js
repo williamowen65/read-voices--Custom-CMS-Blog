@@ -188,42 +188,12 @@ export function FormTemplate({
             .click();
     };
 
-    const handleFileUpload = (e) => {
+    const handlePreviewImg = (e) => {
         const file = e.target.files[0];
-        if (!file) return;
-        const storageRef = ref(
-            storage,
-            `/files/${file.name}`
+        const image = document.querySelector(
+            ".imgContainer img"
         );
-        const uploadTask = uploadBytesResumable(
-            storageRef,
-            file
-        );
-        uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred /
-                        snapshot.totalBytes) *
-                        100
-                );
-                setProgress(progress);
-            },
-            (err) => console.log(err),
-            () => {
-                getDownloadURL(
-                    uploadTask.snapshot.ref
-                ).then((url) => {
-                    dispatch(
-                        setImgUrlForStory({
-                            url,
-                            name: `/files/${file.name}`,
-                        })
-                    );
-                    // setNewImgUrl(url);
-                });
-            }
-        );
+        image.src = URL.createObjectURL(file);
     };
 
     return (
@@ -233,7 +203,7 @@ export function FormTemplate({
                     type='file'
                     id='fileDialogId'
                     accept='.png, .jpg, .jpeg'
-                    onChange={handleFileUpload}
+                    onChange={handlePreviewImg}
                 />
             </form>
             <form

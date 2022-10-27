@@ -1,0 +1,88 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "dZvOd5Rz9fNNWivWp5dkX",
+      "type": "freedraw",
+      "x": 174.0001220703125,
+      "y": 613.0000915527344,
+      "width": 0.0001,
+      "height": 0.0001,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "strokeSharpness": "round",
+      "seed": 1021447281,
+      "version": 3,
+      "versionNonce": 984176209,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1666896550682,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0001,
+          0.0001
+        ]
+      ],
+      "pressures": [],
+      "simulatePressure": true,
+      "lastCommittedPoint": [
+        0.0001,
+        0.0001
+      ]
+    },
+    {
+      "id": "Jw-kGrVVissE4w1fUnfYU",
+      "type": "text",
+      "x": -2965.9998779296875,
+      "y": 278,
+      "width": 507,
+      "height": 101,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "strokeSharpness": "sharp",
+      "seed": 536523583,
+      "version": 134,
+      "versionNonce": 1416720287,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1666896882386,
+      "link": null,
+      "locked": false,
+      "text": "Create New Story\n\n- if file, then upload, and set document to img info\n- regular doc upload",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 93,
+      "containerId": null,
+      "originalText": "Create New Story\n\n- if file, then upload, and set document to img info\n- regular doc upload"
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
