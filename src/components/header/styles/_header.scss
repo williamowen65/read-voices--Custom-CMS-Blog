@@ -33,4 +33,18 @@ header.mainHeader {
         right: 30px;
         // translate: 100px 0;
     }
+    .headerBox {
+        position: relative;
+        .editWebsiteBtn {
+            position: absolute;
+            right: -30px;
+            top: 10px;
+            opacity: 0;
+        }
+        &:hover {
+            .editWebsiteBtn {
+                opacity: 1;
+            }
+        }
+    }
 }

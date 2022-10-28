@@ -1,4 +1,5 @@
 import React from "react";
+import { RiEdit2Fill } from "react-icons/ri";
 import styled from "styled-components";
 import { ContentPadding } from "../../components/SpecialContainers";
 import "./about.scss";
@@ -6,7 +7,7 @@ import "./about.scss";
 export default function About() {
     return (
         <AboutStyled id='about'>
-            <ContentPadding>
+            <ContentPadding classes='contentBox'>
                 <h2>About Page</h2>
                 <p>
                     Lorem ipsum dolor sit amet,
@@ -24,6 +25,10 @@ export default function About() {
                     sapiente? Id, voluptatibus
                     aperiam.
                 </p>
+                <RiEdit2Fill
+                    className='editWebsiteBtn'
+                    size={20}
+                />
             </ContentPadding>
         </AboutStyled>
     );

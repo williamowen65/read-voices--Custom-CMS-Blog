@@ -7,9 +7,11 @@ import {
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BiLogOut } from "react-icons/bi";
+import { RiEdit2Fill } from "react-icons/ri";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase-setup";
 import { BsFilter } from "react-icons/bs";
+import { CgEditMarkup } from "react-icons/cg";
 
 export default function Header() {
     const { loggedIn } = useSelector((state) => {
@@ -36,7 +38,7 @@ export default function Header() {
                     size={30}
                 />
             )}
-            <div>
+            <div className='headerBox'>
                 <h1
                     className='logo'
                     onClick={() => navigate("/")}
@@ -47,6 +49,12 @@ export default function Header() {
                     A brief description of the
                     page
                 </p>
+                {loggedIn && (
+                    <RiEdit2Fill
+                        className='editWebsiteBtn'
+                        size={20}
+                    />
+                )}
             </div>
             {/* {location.pathname === "/" && (
                 <BsFilter

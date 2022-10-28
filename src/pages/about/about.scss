@@ -4,4 +4,18 @@
     .promo {
         margin-top: auto;
     }
+    .contentBox {
+        position: absolute;
+        .editWebsiteBtn {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            opacity: 0;
+        }
+        &:hover {
+            .editWebsiteBtn {
+                opacity: 1;
+            }
+        }
+    }
 }

@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export function ContentPadding({ children }) {
+export function ContentPadding({
+    children,
+    classes,
+}) {
     return (
-        <ContentPaddingStyled>
+        <ContentPaddingStyled className={classes}>
             {children}
         </ContentPaddingStyled>
     );
