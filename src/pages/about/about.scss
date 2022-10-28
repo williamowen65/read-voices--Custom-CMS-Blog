@@ -1,11 +1,12 @@
-#about {
+#about,
+.donate {
     height: 100%;
     min-height: 100%;
     .promo {
         margin-top: auto;
     }
     .contentBox {
-        position: absolute;
+        position: relative;
         .editWebsiteBtn {
             position: absolute;
             top: 0;
