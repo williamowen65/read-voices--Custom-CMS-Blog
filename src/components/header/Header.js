@@ -75,6 +75,17 @@ export default function Header() {
             });
     };
 
+    const handleReset = () => {
+        const titleEl =
+            document.getElementById("title");
+        const subtitle =
+            document.querySelector(".subTitle");
+        setIsEditingTitle(false);
+
+        titleEl.innerText = title.title;
+        subtitle.innerText = title.subtitle;
+    };
+
     return (
         <HeaderStyled id='header'>
             {loggedIn && (
@@ -139,7 +150,11 @@ export default function Header() {
                                     handleSaveTitle
                                 }
                             />
-                            <CgClose />
+                            <CgClose
+                                onClick={
+                                    handleReset
+                                }
+                            />
                         </>
                     )}
                 </div>
