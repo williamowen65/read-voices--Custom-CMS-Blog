@@ -215,6 +215,9 @@ export function FormTemplate({
         document.querySelector(
             ".imgFeedback"
         ).innerText = `Upload Image`;
+        document.getElementById(
+            "fileDialogId"
+        ).value = null;
     };
 
     return (
