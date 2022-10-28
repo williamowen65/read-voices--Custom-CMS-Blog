@@ -252,10 +252,6 @@ export function FormTemplate({
                                 ? story?.img?.url
                                 : "https://via.placeholder.com/150x227"
                         }
-                        style={{
-                            width: "150px",
-                            height: "227px",
-                        }}
                         alt=''
                         srcSet=''
                         onClick={() => {

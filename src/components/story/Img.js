@@ -8,10 +8,6 @@ export function Img({ story }) {
                     ? story.imgUrl
                     : "https://via.placeholder.com/150x227"
             }
-            style={{
-                width: "150px",
-                height: "227px",
-            }}
             alt=''
             srcSet=''
         />

@@ -50,10 +50,6 @@ export default function StoryItem({ story }) {
                     {story.img && (
                         <img
                             src={story.img.url}
-                            style={{
-                                width: "150px",
-                                height: "227px",
-                            }}
                             alt=''
                             srcSet=''
                         />

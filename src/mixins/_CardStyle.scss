@@ -16,6 +16,8 @@
         img {
             align-self: flex-start;
             padding-right: 10px;
+            min-width: 150px;
+            // height: 227px;
         }
         .floatBox {
             flex-grow: 1;
