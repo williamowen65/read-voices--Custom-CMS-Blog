@@ -10,11 +10,11 @@ import { BiLogOut } from "react-icons/bi";
 import { RiEdit2Fill } from "react-icons/ri";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase-setup";
-import { BsFilter } from "react-icons/bs";
-import { CgEditMarkup } from "react-icons/cg";
 import { GrAnalytics } from "react-icons/gr";
+import useWebsiteCol from "../../hooks/useWebsiteCol";
 
 export default function Header() {
+    useWebsiteCol();
     const { loggedIn } = useSelector((state) => {
         return state.app;
     });
@@ -30,6 +30,7 @@ export default function Header() {
                 console.error(err);
             });
     };
+
     return (
         <HeaderStyled id='header'>
             {loggedIn && (

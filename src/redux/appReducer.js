@@ -7,6 +7,7 @@ const appSlice = createSlice({
         verboseLog: [],
         isEditing: false,
         activeSlug: null,
+        website: [],
     },
     reducers: {
         setLoggedIn: (state, action) => {
@@ -28,11 +29,16 @@ const appSlice = createSlice({
         setActiveSlug: (state, action) => {
             state.activeSlug = action.payload;
         },
+        setWebsite: (state, action) => {
+            state.website = action.payload;
+        },
     },
 });
 
 export const setLoggedIn =
     appSlice.actions.setLoggedIn;
+export const setWebsite =
+    appSlice.actions.setWebsite;
 export const setActiveSlug =
     appSlice.actions.setActiveSlug;
 export const setIsEditing =
