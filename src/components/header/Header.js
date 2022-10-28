@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import "./styles/_header.scss";
 import {
@@ -11,10 +11,8 @@ import { RiEdit2Fill } from "react-icons/ri";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase-setup";
 import { GrAnalytics } from "react-icons/gr";
-import useWebsiteCol from "../../hooks/useWebsiteCol";
 
 export default function Header() {
-    useWebsiteCol();
     const { loggedIn } = useSelector((state) => {
         return state.app;
     });

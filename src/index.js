@@ -22,6 +22,7 @@ import EditNavAlert from "./components/util/EditNavAlert";
 import favicon from "./assets/favicon.ico";
 import BellMT from "./fonts/BellMT.ttf";
 import playFairFont from "./fonts/PlayfairDisplay-Regular.ttf";
+import FetchWebsite from "./components/util/FetchWebsite";
 
 const Dashboard = React.lazy(() =>
     import("./components/dashboard/Dashboard.js")
@@ -64,6 +65,7 @@ const Appp = () => {
 root.render(
     <React.StrictMode>
         <Provider store={store}>
+            <FetchWebsite />
             <FetchStories />
             <AuthStateChange />
             <Appp />
