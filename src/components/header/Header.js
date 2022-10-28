@@ -16,6 +16,7 @@ import {
     doc,
     updateDoc,
 } from "firebase/firestore";
+import { CgClose } from "react-icons/cg";
 
 export default function Header() {
     const { loggedIn, website } = useSelector(
@@ -120,20 +121,28 @@ export default function Header() {
                 >
                     {title?.subtitle}
                 </p>
-                {loggedIn && !isEditingTitle && (
-                    <RiEdit2Fill
-                        className='editWebsiteBtn'
-                        size={20}
-                        onClick={handleEditTitle}
-                    />
-                )}
-                {loggedIn && isEditingTitle && (
-                    <AiFillSave
-                        className='editWebsiteBtn'
-                        size={20}
-                        onClick={handleSaveTitle}
-                    />
-                )}
+                <div className='editWebsiteBtn'>
+                    {loggedIn &&
+                        !isEditingTitle && (
+                            <RiEdit2Fill
+                                size={20}
+                                onClick={
+                                    handleEditTitle
+                                }
+                            />
+                        )}
+                    {loggedIn && isEditingTitle && (
+                        <>
+                            <AiFillSave
+                                size={20}
+                                onClick={
+                                    handleSaveTitle
+                                }
+                            />
+                            <CgClose />
+                        </>
+                    )}
+                </div>
             </div>
             {/* {location.pathname === "/" && (
                 <BsFilter
