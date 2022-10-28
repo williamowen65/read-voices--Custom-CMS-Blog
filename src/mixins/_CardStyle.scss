@@ -1,7 +1,10 @@
 @mixin StoryLayout {
     display: flex;
     flex-direction: column;
-    min-width: 100%;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    // translate: -50% 0;
     img {
         // display: inline-block;
     }
