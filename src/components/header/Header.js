@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import "./styles/_header.scss";
 import {
@@ -9,8 +9,13 @@ import { useSelector } from "react-redux";
 import { BiLogOut } from "react-icons/bi";
 import { RiEdit2Fill } from "react-icons/ri";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase-setup";
+import { auth, db } from "../../firebase-setup";
 import { GrAnalytics } from "react-icons/gr";
+import { AiFillSave } from "react-icons/ai";
+import {
+    doc,
+    updateDoc,
+} from "firebase/firestore";
 
 export default function Header() {
     const { loggedIn, website } = useSelector(
@@ -29,6 +34,40 @@ export default function Header() {
         signOut(auth)
             .then(() => {
                 console.log("user signed out");
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
+    const [isEditingTitle, setIsEditingTitle] =
+        useState(false);
+
+    const handleEditTitle = () => {
+        setIsEditingTitle(true);
+    };
+    const handleSaveTitle = () => {
+        const title =
+            document.getElementById(
+                "title"
+            ).innerText;
+        const subtitle =
+            document.querySelector(
+                ".subTitle"
+            ).innerText;
+        const docRef = doc(
+            db,
+            "website",
+            "title"
+        );
+
+        const docc = {
+            title,
+            subtitle,
+        };
+
+        updateDoc(docRef, docc)
+            .then(() => {
+                setIsEditingTitle(false);
             })
             .catch((err) => {
                 console.error(err);
@@ -56,18 +95,43 @@ export default function Header() {
                     />
                 </div>
             )}
-            <div className='headerBox'>
+            <div
+                className={
+                    isEditingTitle
+                        ? "headerBox isEditing"
+                        : "headerBox"
+                }
+            >
                 <h1
                     className='logo'
+                    id='title'
                     onClick={() => navigate("/")}
+                    contentEditable={
+                        isEditingTitle
+                    }
                 >
                     {title?.title}
                 </h1>
-                <p>{title?.subtitle}</p>
-                {loggedIn && (
+                <p
+                    className='subTitle'
+                    contentEditable={
+                        isEditingTitle
+                    }
+                >
+                    {title?.subtitle}
+                </p>
+                {loggedIn && !isEditingTitle && (
                     <RiEdit2Fill
                         className='editWebsiteBtn'
                         size={20}
+                        onClick={handleEditTitle}
+                    />
+                )}
+                {loggedIn && isEditingTitle && (
+                    <AiFillSave
+                        className='editWebsiteBtn'
+                        size={20}
+                        onClick={handleSaveTitle}
                     />
                 )}
             </div>

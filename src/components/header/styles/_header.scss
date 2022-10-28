@@ -53,5 +53,12 @@ header.mainHeader {
                 opacity: 1;
             }
         }
+        * {
+            outline: none;
+        }
+        &.isEditing {
+            background-color: lightblue;
+            padding-inline: 20px;
+        }
     }
 }
