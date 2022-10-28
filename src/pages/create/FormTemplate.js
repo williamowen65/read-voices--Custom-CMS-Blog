@@ -286,7 +286,7 @@ export function FormTemplate({
                         Upload Image
                     </h3>
                 </div>
-                <div>
+                <div className='formArea'>
                     <input
                         placeholder='Title'
                         autoComplete='off'
