@@ -13,11 +13,17 @@
         // display: inline;
         // flex-direction: column;
         padding: 10px 10px 0px;
-        img {
-            align-self: flex-start;
-            padding-right: 10px;
+        .imgContainer {
             min-width: 150px;
-            // height: 227px;
+            display: flex;
+            justify-content: center;
+            img {
+                align-self: flex-start;
+                padding-right: 10px;
+                // height: 227px;
+                max-width: 100%;
+                // position: absolute;
+            }
         }
         .floatBox {
             flex-grow: 1;

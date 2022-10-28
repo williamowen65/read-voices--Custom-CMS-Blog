@@ -48,11 +48,15 @@ export default function StoryItem({ story }) {
                 </div>
                 <div className='item'>
                     {story.img && (
-                        <img
-                            src={story.img.url}
-                            alt=''
-                            srcSet=''
-                        />
+                        <div className='imgContainer'>
+                            <img
+                                src={
+                                    story.img.url
+                                }
+                                alt=''
+                                srcSet=''
+                            />
+                        </div>
                     )}
                     <div className='floatBox'>
                         <header

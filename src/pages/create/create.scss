@@ -12,6 +12,9 @@
 
         height: fit-content;
         position: relative;
+        img {
+            width: 150px;
+        }
         h3 {
             position: absolute;
         }
@@ -58,6 +61,7 @@
             cursor: pointer;
             img {
                 align-self: flex-start;
+                width: 150px;
             }
         }
     }
