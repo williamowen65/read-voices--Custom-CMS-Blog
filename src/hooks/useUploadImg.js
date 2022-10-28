@@ -1,4 +1,5 @@
 import {
+    deleteField,
     doc,
     updateDoc,
 } from "firebase/firestore";
@@ -44,6 +45,19 @@ export default function useUploadImg({ story }) {
                 `${story.img.name}`
             );
             deleteObject(storageRef);
+            const docRef = doc(
+                db,
+                "stories",
+                story?.id || newStoryId
+            );
+            const docc = {
+                img: deleteField(),
+            };
+            updateDoc(docRef, docc)
+                .then(() => {})
+                .catch((err) => {
+                    console.error(err);
+                });
         }
         const file = document.getElementById(
             "fileDialogId"
