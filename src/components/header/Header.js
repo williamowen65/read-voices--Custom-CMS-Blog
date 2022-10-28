@@ -40,7 +40,12 @@ export default function Header() {
             {loggedIn && (
                 <div className='websiteBtns'>
                     <GrAnalytics
-                        onClick={handleLogout}
+                        onClick={() => {
+                            window.open(
+                                "https://console.firebase.google.com/u/0/project/read-voices-2/analytics/app/web:MGZhNGZhMGItODhmNC00MTE5LThmMzAtNTZlMzc3ZGQyYjUz/overview/~2F%3Ft%3D1666984305333&fpn%3D340433485596&swu%3D1&sgu%3D1&sus%3Dupgraded&params%3D_u..pageSize%253D25&cs%3Dapp.m.dashboard.overview&g%3D1",
+                                "_blank"
+                            );
+                        }}
                         size={25}
                         className='websiteBtn'
                     />
