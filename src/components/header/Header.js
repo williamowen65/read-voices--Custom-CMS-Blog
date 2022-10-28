@@ -13,9 +13,15 @@ import { auth } from "../../firebase-setup";
 import { GrAnalytics } from "react-icons/gr";
 
 export default function Header() {
-    const { loggedIn } = useSelector((state) => {
-        return state.app;
-    });
+    const { loggedIn, website } = useSelector(
+        (state) => {
+            return state.app;
+        }
+    );
+
+    const title = website.filter(
+        (el) => el.id === "title"
+    )[0];
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -50,12 +56,9 @@ export default function Header() {
                     className='logo'
                     onClick={() => navigate("/")}
                 >
-                    Read Voices
+                    {title?.title}
                 </h1>
-                <p>
-                    A brief description of the
-                    page
-                </p>
+                <p>{title?.subtitle}</p>
                 {loggedIn && (
                     <RiEdit2Fill
                         className='editWebsiteBtn'
