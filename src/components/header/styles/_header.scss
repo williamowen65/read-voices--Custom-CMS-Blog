@@ -20,11 +20,16 @@ header.mainHeader {
     p {
         margin-top: 0;
     }
-    .logout {
+    .websiteBtns {
         position: absolute;
         right: 10px;
-        cursor: pointer;
         top: 10px;
+        display: flex;
+        flex-direction: row;
+        .websiteBtn {
+            cursor: pointer;
+            margin-inline: 10px;
+        }
     }
     .filter {
         position: absolute;

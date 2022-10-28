@@ -35,7 +35,13 @@ export default function useUploadImg({ story }) {
         //         story
         //     );
         // }
-        if (story?.img) {
+        const image = document.querySelector(
+            ".imgContainer img"
+        );
+        if (
+            story?.img &&
+            image.src.includes("localhost")
+        ) {
             // console.log(
             //     "TRYING TO DELETE THIS IMG",
             //     story.img

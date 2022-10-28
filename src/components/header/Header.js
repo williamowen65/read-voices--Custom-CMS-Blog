@@ -12,6 +12,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase-setup";
 import { BsFilter } from "react-icons/bs";
 import { CgEditMarkup } from "react-icons/cg";
+import { GrAnalytics } from "react-icons/gr";
 
 export default function Header() {
     const { loggedIn } = useSelector((state) => {
@@ -32,11 +33,18 @@ export default function Header() {
     return (
         <HeaderStyled id='header'>
             {loggedIn && (
-                <BiLogOut
-                    onClick={handleLogout}
-                    className='logout'
-                    size={30}
-                />
+                <div className='websiteBtns'>
+                    <GrAnalytics
+                        onClick={handleLogout}
+                        size={25}
+                        className='websiteBtn'
+                    />
+                    <BiLogOut
+                        onClick={handleLogout}
+                        size={30}
+                        className='websiteBtn'
+                    />
+                </div>
             )}
             <div className='headerBox'>
                 <h1
