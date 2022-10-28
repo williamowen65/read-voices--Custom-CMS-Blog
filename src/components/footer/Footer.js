@@ -5,10 +5,15 @@ import {
     NavLink,
     useLocation,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {
+    useDispatch,
+    useSelector,
+} from "react-redux";
 import { ContentPadding } from "../SpecialContainers";
+import { setActiveSlug } from "../../redux/appReducer";
 
 export default function Footer() {
+    const dispatch = useDispatch();
     const location = useLocation();
     const { loggedIn } = useSelector(
         (state) => state.app
@@ -48,11 +53,29 @@ export default function Footer() {
                     </div>
                 )}
                 <div className='mainFooter'>
-                    <NavLink to='/about'>
+                    <NavLink
+                        to='/about'
+                        onClick={() => {
+                            dispatch(
+                                setActiveSlug(
+                                    null
+                                )
+                            );
+                        }}
+                    >
                         About
                     </NavLink>{" "}
                     |{" "}
-                    <NavLink to='/donate'>
+                    <NavLink
+                        to='/donate'
+                        onClick={() => {
+                            dispatch(
+                                setActiveSlug(
+                                    null
+                                )
+                            );
+                        }}
+                    >
                         Donate
                     </NavLink>
                 </div>
