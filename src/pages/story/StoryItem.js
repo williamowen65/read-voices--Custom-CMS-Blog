@@ -94,7 +94,11 @@ export default function StoryItem({ story }) {
                     )}
                     <div className='floatBox'>
                         <header
-                            media='desktop'
+                            media={
+                                story.img
+                                    ? "desktop"
+                                    : ""
+                            }
                             className={
                                 story.img
                                     ? "story"
