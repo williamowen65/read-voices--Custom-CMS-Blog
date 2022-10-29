@@ -11,11 +11,14 @@
     .item {
         // flex-grow: 1;
         display: flex;
+        @media (max-width: 500px) {
+            flex-direction: column;
+        }
         // border-top: 2px solid black;
         // min-width: 100vw;
         // display: inline;
         // flex-direction: column;
-        padding: 10px 10px 0px 0px;
+        padding: 10px 0px 0px 0px;
         .imgContainer {
             min-width: 150px;
             display: flex;
@@ -51,7 +54,8 @@
                 }
                 // position: absolute;
                 &.noImg {
-                    width: calc(
+                    width: 100%;
+                    max-width: calc(
                         233px + 150px + 28px
                     );
                 }
