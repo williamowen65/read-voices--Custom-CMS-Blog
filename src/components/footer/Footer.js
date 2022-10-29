@@ -53,31 +53,21 @@ export default function Footer() {
                     </div>
                 )}
                 <div className='mainFooter'>
-                    <NavLink
-                        to='/about'
-                        onClick={() => {
-                            dispatch(
-                                setActiveSlug(
-                                    null
-                                )
-                            );
-                        }}
-                    >
-                        About
-                    </NavLink>{" "}
-                    |{" "}
-                    <NavLink
-                        to='/donate'
-                        onClick={() => {
-                            dispatch(
-                                setActiveSlug(
-                                    null
-                                )
-                            );
-                        }}
-                    >
-                        Donate
-                    </NavLink>
+                    <div className='promoContainer'>
+                        <p>
+                            Looking for your own
+                            custom website?
+                        </p>
+                        <p>
+                            Contact{" "}
+                            <a
+                                href='mailto://william.owen.dev@gmail.com'
+                                className='promo'
+                            >
+                                William Owen
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </ContentPadding>
         </FooterStyled>

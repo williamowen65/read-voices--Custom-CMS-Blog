@@ -15,11 +15,12 @@
         // min-width: 100vw;
         // display: inline;
         // flex-direction: column;
-        padding: 10px 10px 0px;
+        padding: 10px 10px 0px 0px;
         .imgContainer {
             min-width: 150px;
             display: flex;
             justify-content: center;
+            padding-right: 28px;
             img {
                 align-self: flex-start;
                 // padding-right: 10px;
@@ -37,8 +38,9 @@
                 flex-direction: column;
                 width: 233px;
                 height: fit-content;
-                translate: 10px 20px;
+                translate: 0 20px;
                 padding: 10px;
+                padding-left: 0px;
                 margin-right: 30px;
                 padding-bottom: 10px;
                 margin-bottom: 10px;
@@ -49,7 +51,9 @@
                 }
                 // position: absolute;
                 &.noImg {
-                    width: calc(233px + 150px);
+                    width: calc(
+                        233px + 150px + 28px
+                    );
                 }
                 h2,
                 p {
