@@ -61,7 +61,7 @@ export default function Footer() {
                         <p>
                             Contact{" "}
                             <a
-                                href='mailto://william.owen.dev@gmail.com'
+                                href='mailto:william.owen.dev@gmail.com'
                                 className='promo'
                             >
                                 William Owen
