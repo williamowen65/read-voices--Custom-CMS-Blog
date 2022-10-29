@@ -42,3 +42,20 @@ body {
     cursor: pointer;
     position: absolute;
 }
+
+[media="mobile"] {
+    display: none !important;
+}
+@media (max-width: 500px) {
+    [media="desktop"] {
+        display: none !important;
+    }
+    [media="mobile"] {
+        display: inline-block !important;
+        &.mobileFlex {
+            display: inline-flex !important;
+            // flex-direction: column;
+            width: fit-content;
+        }
+    }
+}

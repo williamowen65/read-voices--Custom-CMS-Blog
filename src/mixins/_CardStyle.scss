@@ -33,6 +33,11 @@
                 margin: 0 auto;
                 // position: absolute;
             }
+            &.mobileFlex {
+                header {
+                    padding-left: 10px;
+                }
+            }
         }
         .floatBox {
             flex-grow: 1;
@@ -53,6 +58,7 @@
                     margin-bottom: 25px;
                 }
                 // position: absolute;
+
                 &.noImg {
                     width: 100%;
                     max-width: calc(

@@ -48,7 +48,10 @@ export default function StoryItem({ story }) {
                 </div>
                 <div className='item'>
                     {story.img && (
-                        <div className='imgContainer'>
+                        <div
+                            className='imgContainer'
+                            media='desktop'
+                        >
                             <img
                                 src={
                                     story.img.url
@@ -58,8 +61,40 @@ export default function StoryItem({ story }) {
                             />
                         </div>
                     )}
+                    {story.img && (
+                        <div
+                            className='imgContainer mobileFlex'
+                            media='mobile'
+                        >
+                            <img
+                                src={
+                                    story.img.url
+                                }
+                                alt=''
+                                srcSet=''
+                            />
+                            <header
+                                media='mobile'
+                                className={
+                                    story.img
+                                        ? "story"
+                                        : "story noImg"
+                                }
+                            >
+                                <h2>
+                                    {story.title}
+                                </h2>
+                                <p>
+                                    {story.meta.publishedAt?.slice(
+                                        3
+                                    )}
+                                </p>
+                            </header>
+                        </div>
+                    )}
                     <div className='floatBox'>
                         <header
+                            media='desktop'
                             className={
                                 story.img
                                     ? "story"
