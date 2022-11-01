@@ -41,6 +41,7 @@ body {
 .editWebsiteBtn {
     cursor: pointer;
     position: absolute;
+    z-index: 1;
 }
 
 [media="mobile"] {

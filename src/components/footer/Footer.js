@@ -14,6 +14,11 @@ import { ContentPadding } from "../SpecialContainers";
 import { setActiveSlug } from "../../redux/appReducer";
 import { AiFillSave } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
+import {
+    doc,
+    updateDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase-setup";
 
 export default function Footer() {
     const dispatch = useDispatch();
@@ -25,10 +30,50 @@ export default function Footer() {
     const footer = website.filter(
         (el) => el.id == "footer"
     )[0];
-    const [isEditingTitle, setIsEditingTitle] =
+    if (footer) {
+        const { p1, p2 } = footer;
+    }
+    const [isEditing, setIsEditing] =
         useState(false);
-    const handleEditTitle = () => {
-        setIsEditingTitle(true);
+    const handleEdit = () => {
+        setIsEditing(true);
+    };
+    const handleReset = () => {
+        const p1 = document.querySelector(".p1");
+        const p2 = document.querySelector(".p2");
+        setIsEditing(false);
+
+        p1.innerText = footer.p1;
+        p2.innerText = footer.p2;
+    };
+
+    const handleSaveFooter = () => {
+        const p1 =
+            document.querySelector(
+                ".p1"
+            ).innerText;
+        const p2 =
+            document.querySelector(
+                ".p2"
+            ).innerText;
+        const docRef = doc(
+            db,
+            "website",
+            "footer"
+        );
+
+        const docc = {
+            p1,
+            p2,
+        };
+
+        updateDoc(docRef, docc)
+            .then(() => {
+                setIsEditing(false);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     };
     return (
         <FooterStyled>
@@ -46,38 +91,60 @@ export default function Footer() {
                     </div>
                 )}
                 {footer && (
-                    <div>
+                    <div className='footerContainer'>
                         {loggedIn && (
                             <div className='editWebsiteBtn'>
-                                {!isEditingTitle && (
+                                {!isEditing && (
                                     <RiEdit2Fill
                                         size={20}
                                         onClick={
-                                            handleEditTitle
+                                            handleEdit
                                         }
                                     />
                                 )}
-                                {isEditingTitle && (
+                                {isEditing && (
                                     <>
                                         <AiFillSave
                                             size={
                                                 20
                                             }
-                                            // onClick={
-                                            //     // handleSaveTitle
-                                            // }
+                                            onClick={
+                                                handleSaveFooter
+                                            }
                                         />
                                         <CgClose
-                                        // onClick={
-                                        //     // handleReset
-                                        // }
+                                            onClick={
+                                                handleReset
+                                            }
                                         />
                                     </>
                                 )}
                             </div>
                         )}
-                        <p>{footer.p1}</p>
-                        <p>{footer.p2}</p>
+                        <div
+                            className={
+                                isEditing
+                                    ? "headerBox isEditing"
+                                    : "headerBox"
+                            }
+                        >
+                            <p
+                                className='p1'
+                                contentEditable={
+                                    isEditing
+                                }
+                            >
+                                {footer.p1}
+                            </p>
+                            <p
+                                className='p2'
+                                contentEditable={
+                                    isEditing
+                                }
+                            >
+                                {footer.p2}
+                            </p>
+                        </div>
                     </div>
                 )}
             </ContentPadding>

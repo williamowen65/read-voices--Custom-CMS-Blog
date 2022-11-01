@@ -55,4 +55,27 @@ footer {
             text-decoration: underline;
         }
     }
+    .footerContainer {
+        position: relative;
+        .editWebsiteBtn {
+            right: -50px;
+            opacity: 0;
+        }
+        &:hover {
+            .editWebsiteBtn {
+                opacity: 1;
+            }
+        }
+        .headerBox {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            p {
+                margin: 0;
+                line-height: 30px;
+                scale: 0.7;
+                letter-spacing: 1px;
+            }
+        }
+    }
 }

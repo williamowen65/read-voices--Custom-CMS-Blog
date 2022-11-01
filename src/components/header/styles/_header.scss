@@ -39,26 +39,26 @@ header.mainHeader {
         right: 30px;
         // translate: 100px 0;
     }
-    .headerBox {
-        position: relative;
-        min-height: 110px;
+}
+.headerBox {
+    position: relative;
+    min-height: 110px;
+    .editWebsiteBtn {
+        position: absolute;
+        right: -30px;
+        top: 10px;
+        opacity: 0;
+    }
+    &:hover {
         .editWebsiteBtn {
-            position: absolute;
-            right: -30px;
-            top: 10px;
-            opacity: 0;
+            opacity: 1;
         }
-        &:hover {
-            .editWebsiteBtn {
-                opacity: 1;
-            }
-        }
-        * {
-            outline: none;
-        }
-        &.isEditing {
-            background-color: lightblue;
-            padding-inline: 20px;
-        }
+    }
+    * {
+        outline: none;
+    }
+    &.isEditing {
+        background-color: lightblue;
+        padding-inline: 20px;
     }
 }
