@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import "./styles/_footer.scss";
+import { RiEdit2Fill } from "react-icons/ri";
 import {
     NavLink,
     useLocation,
@@ -11,13 +12,24 @@ import {
 } from "react-redux";
 import { ContentPadding } from "../SpecialContainers";
 import { setActiveSlug } from "../../redux/appReducer";
+import { AiFillSave } from "react-icons/ai";
+import { CgClose } from "react-icons/cg";
 
 export default function Footer() {
     const dispatch = useDispatch();
     const location = useLocation();
-    const { loggedIn } = useSelector(
+    const { loggedIn, website } = useSelector(
         (state) => state.app
     );
+    console.log(website);
+    const footer = website.filter(
+        (el) => el.id == "footer"
+    )[0];
+    const [isEditingTitle, setIsEditingTitle] =
+        useState(false);
+    const handleEditTitle = () => {
+        setIsEditingTitle(true);
+    };
     return (
         <FooterStyled>
             <ContentPadding>
@@ -33,42 +45,41 @@ export default function Footer() {
                         )}
                     </div>
                 )}
-                {location.pathname.includes(
-                    "about"
-                ) && (
-                    <div className='promoContainer'>
-                        <p>
-                            Looking for your own
-                            custom website?
-                        </p>
-                        <p>
-                            Contact{" "}
-                            <a
-                                href='mailto://william.owen.dev@gmail.com'
-                                className='promo'
-                            >
-                                William Owen
-                            </a>
-                        </p>
+                {footer && (
+                    <div>
+                        {loggedIn && (
+                            <div className='editWebsiteBtn'>
+                                {!isEditingTitle && (
+                                    <RiEdit2Fill
+                                        size={20}
+                                        onClick={
+                                            handleEditTitle
+                                        }
+                                    />
+                                )}
+                                {isEditingTitle && (
+                                    <>
+                                        <AiFillSave
+                                            size={
+                                                20
+                                            }
+                                            // onClick={
+                                            //     // handleSaveTitle
+                                            // }
+                                        />
+                                        <CgClose
+                                        // onClick={
+                                        //     // handleReset
+                                        // }
+                                        />
+                                    </>
+                                )}
+                            </div>
+                        )}
+                        <p>{footer.p1}</p>
+                        <p>{footer.p2}</p>
                     </div>
                 )}
-                <div className='mainFooter'>
-                    <div className='promoContainer'>
-                        <p>
-                            Looking for your own
-                            custom website?
-                        </p>
-                        <p>
-                            Contact{" "}
-                            <a
-                                href='mailto:william.owen.dev@gmail.com'
-                                className='promo'
-                            >
-                                William Owen
-                            </a>
-                        </p>
-                    </div>
-                </div>
             </ContentPadding>
         </FooterStyled>
     );
