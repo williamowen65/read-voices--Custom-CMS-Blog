@@ -61,12 +61,13 @@ export function FormTemplate({
 
     useEffect(() => {
         if (story) {
+            console.log(story);
             document.querySelector(
                 `#summernote`
             ).value = story.description;
 
             document.querySelector(
-                `#title`
+                `input#title`
             ).value = story.title;
             setButtons(story.buttons);
 
